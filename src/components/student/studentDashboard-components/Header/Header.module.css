@@ -1,0 +1,16 @@
+.header {
+  padding: 2rem;
+  background-color: white;
+}
+
+.welcome {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 1rem;
+}

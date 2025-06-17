@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './studentDashboard.module.css';
+import Header from '../../../components/student/studentDashboard-components/Header/Header';
 
 export const mockData = {
   student: {
@@ -74,7 +75,9 @@ function StudentDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'classes' | 'assignments'>('overview');
 
   return (
-    <div className={styles.container}></div>
+    <div className={styles.container}>
+      <Header studentName={mockData.student.name} />
+    </div>
   );
 }
 
