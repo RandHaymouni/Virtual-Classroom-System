@@ -1,0 +1,23 @@
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: white;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.tab {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: #6b7280;
+}
+
+.activeTab {
+  color: #1f2937;
+  border-bottom-color: #3b82f6;
+}
