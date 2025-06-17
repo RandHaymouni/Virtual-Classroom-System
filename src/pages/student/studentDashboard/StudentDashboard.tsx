@@ -2,6 +2,9 @@ import { useState } from 'react';
 import styles from './studentDashboard.module.css';
 import Header from '../../../components/student/studentDashboard-components/Header/Header';
 import Tabs from '../../../components/student/studentDashboard-components/Tabs/Tabs';
+import Overview from '../../../components/student/studentDashboard-components/Overview/Overview';
+import Classes from '../../../components/student/studentDashboard-components/Classes/Classes';
+import Assignments from '../../../components/student/studentDashboard-components/Assignments/Assignments';
 
 export const mockData = {
   student: {
@@ -80,6 +83,11 @@ function StudentDashboard() {
       <Header studentName={mockData.student.name} />
       <Tabs activeTab={activeTab}
             setActiveTab={setActiveTab} />
+      <div className={styles.content}>
+        {activeTab === "overview" && <Overview setAvtiveTap={setActiveTab} />}
+        {activeTab === "classes" && <Classes />}
+        {activeTab === "assignments" && <Assignments />}
+      </div>
     </div>
   );
 }
