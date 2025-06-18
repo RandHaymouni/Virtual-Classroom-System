@@ -1,0 +1,218 @@
+.card {
+  width: 100%;
+  max-width: 360px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+  margin: 0 auto;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Header section with colored background */
+.header {
+  padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+  position: relative;
+}
+
+.blue .header {
+  background: #dbeafe;
+}
+
+.green .header {
+  background: #d1fae5;
+}
+
+.purple .header {
+  background: #e9d5ff;
+}
+
+.orange .header {
+  background: #fed7aa;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.3;
+}
+
+.code {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: fit-content;
+  border: 1px solid #acacb1;
+  border-radius: 8px;
+  padding: 0.15rem 0.75rem;
+
+}
+
+.codeIcon {
+  width: 14px;
+  height: 14px;
+} 
+
+/* Body section */
+.body {
+  padding: 1.3rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Students info */
+.studentsInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.studentsIcon {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+.studentsCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Activity section */
+.activitySection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activityLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.activityBox {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.activityContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.activityIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Activity icon colors based on card color */
+.blue .activityIcon {
+  color: #3b82f6;
+}
+
+.green .activityIcon {
+  color: #10b981;
+}
+
+.purple .activityIcon {
+  color: #8b5cf6;
+}
+
+.orange .activityIcon {
+  color: #f59e0b;
+}
+
+.activityDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.activityText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.activityDue {
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* View Class link section with divider */
+.viewSection {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 0.3rem;
+  margin-top: 0.1rem;
+}
+
+.viewLink {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.blue .viewLink {
+  color: #3b82f6;
+}
+
+.blue .viewLink:hover {
+  color: #2563eb;
+}
+
+.green .viewLink {
+  color: #10b981;
+}
+
+.green .viewLink:hover {
+  color: #059669;
+}
+
+.purple .viewLink {
+  color: #8b5cf6;
+}
+
+.purple .viewLink:hover {
+  color: #7c3aed;
+}
+
+.orange .viewLink {
+  color: #f59e0b;
+}
+
+.orange .viewLink:hover {
+  color: #d97706;
+}
+
+.viewLink:hover {
+  text-decoration: underline;
+}
+
