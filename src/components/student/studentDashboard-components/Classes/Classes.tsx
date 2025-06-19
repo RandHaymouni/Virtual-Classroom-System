@@ -1,6 +1,7 @@
 import { Users, BookOpen, Plus } from 'lucide-react';
 import { mockData } from '../../../../pages/student/studentDashboard/StudentDashboard';
 import styles from './Classes.module.css';
+import { useNavigate } from 'react-router';
 
 function Classes() {
   const getClassColors = (colorClass: string) => {
@@ -12,13 +13,15 @@ function Classes() {
     return colorMap[colorClass] || {};
   };
 
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className={styles.assignmentsHeader}>
         <div>
           <h2 className={styles.cardTitle}>My Classes ({mockData.classes.length})</h2>
         </div>
-        <button className={styles.joinClassButton}>
+        <button className={styles.joinClassButton} onClick={() => navigate("/joinClass")}>
           <Plus size={16} />
           Join New Class
         </button>
