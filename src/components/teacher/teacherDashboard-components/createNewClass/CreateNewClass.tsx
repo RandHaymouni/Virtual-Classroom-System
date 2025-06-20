@@ -1,10 +1,11 @@
 import { Plus, ArrowRight } from "lucide-react"
 import styles from "./createNewClass.module.css"
-
+import { useNavigate } from "react-router"
 
 const CreateNewClass = () => {
+  const navigate = useNavigate();
   const handleCreateClass = () => {
-    console.log("Creating new class...")
+    navigate("/createClass")
   }
 
   return (
