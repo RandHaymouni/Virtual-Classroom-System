@@ -4,7 +4,7 @@ interface HeaderProps {
   studentName: string;
 }
 
-function Header(props: HeaderProps) {
+const Header = (props: HeaderProps) => {
   return (
     <div className={styles.header}>
       <h1 className={styles.welcome}>Welcome back, {props.studentName}!</h1>

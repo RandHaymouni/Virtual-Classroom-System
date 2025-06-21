@@ -2,7 +2,7 @@ import { Users, BookOpen, Plus } from 'lucide-react';
 import { mockData } from '../../../../pages/student/studentDashboard/StudentDashboard';
 import styles from './Classes.module.css';
 
-function Classes() {
+const Classes = () => {
   const getClassColors = (colorClass: string) => {
     const colorMap: { [key: string]: any } = {
       'bg-green-50 border-green-200': { backgroundColor: '#f0fdf4', borderColor: '#bbf7d0' },
