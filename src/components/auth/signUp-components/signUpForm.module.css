@@ -1,0 +1,303 @@
+.container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.formWrapper {
+  max-width: 448px;
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 32px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.logoIcon {
+  background-color: #0d9488;
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoIcon svg {
+  height: 24px;
+  width: 24px;
+  color: white;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+  margin: 0;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+.accountTypeToggle {
+  display: flex;
+  margin-bottom: 24px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.toggleButton {
+  flex: 1;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background: transparent;
+  color: #6b7280;
+}
+
+.toggleButton:hover {
+  color: #111827;
+}
+
+.toggleButton.active {
+  background-color: white;
+  color: #111827;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nameFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
+}
+
+.passwordField {
+  position: relative;
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 8px 40px 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.passwordInput:focus {
+  outline: none;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2);
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.passwordToggle:hover {
+  color: #6b7280;
+}
+
+.passwordToggle svg {
+  height: 16px;
+  width: 16px;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox {
+  margin-top: 4px;
+  height: 16px;
+  width: 16px;
+  accent-color: #0d9488;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.link {
+  color: #0d9488;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #0f766e;
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #111827;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 14px;
+}
+
+.submitButton:hover {
+  background-color: #1f2937;
+}
+
+.submitButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.5);
+}
+
+.loginSection {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.loginText {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.footerText {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .formWrapper {
+    padding: 24px;
+  }
+
+  .nameFields {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}

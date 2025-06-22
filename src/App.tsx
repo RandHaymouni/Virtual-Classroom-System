@@ -1,17 +1,16 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import Login from "./pages/auth/login/Login";
-import SignUp from "./pages/auth/signUp/SignUp";
-import StudentViewClass from "./pages/student/StudentViewClass/StudentViewClass";
-import JoinClass from "./pages/student/joinClass/JoinClass";
-import StudentAssignmentDetails from "./pages/student/studentAssignmentDetails/StudentAssignmentDetails";
-import StudentDashboard from "./pages/student/studentDashboard/StudentDashboard";
-import TeacherViewClass from "./pages/teacher/TeacherViewClass/TeacherViewClass";
-import CreateAssignments from "./pages/teacher/createAssignments/CreateAssignments";
-import CreateClass from "./pages/teacher/createClass/CreateClass";
-import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/TeacherAssignmentDetails";
-import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard";
-
+import Login from "./pages/auth/login/Login"
+import SignUp from "./pages/auth/signUp/SignUp"
+import StudentViewClass from "./pages/student/StudentViewClass/StudentViewClass"
+import JoinClass from "./pages/student/joinClass/JoinClass"
+import StudentAssignmentDetails from "./pages/student/studentAssignmentDetails/StudentAssignmentDetails"
+import StudentDashboard from "./pages/student/studentDashboard/StudentDashboard"
+import TeacherViewClass from "./pages/teacher/TeacherViewClass/TeacherViewClass"
+import CreateAssignments from "./pages/teacher/createAssignments/CreateAssignments"
+import CreateClass from "./pages/teacher/createClass/CreateClass"
+import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/TeacherAssignmentDetails"
+import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard"
 
 function App() {
 
