@@ -1,0 +1,85 @@
+.classHeader {
+    height: 130px;
+    width: 100%;
+    background-color: rgba(236, 255, 245, 255);
+    margin-top: 0%;
+    padding-top: 0%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: flex-end;
+
+}
+
+.id {
+    color: rgb(43, 42, 42);
+    font-size: 13px;
+    margin: 1%;
+}
+
+
+
+.backBtn {
+    background-color: transparent;
+    border: none;
+    color: grey;
+    margin-left: 20px;
+}
+
+.backBtn:hover {
+    cursor: pointer;
+    color: black;
+
+}
+
+.classInfo {
+    justify-content: flex-end;
+    row-gap: 0px;
+    margin-left: 20px;
+}
+
+.classInfo>h1 {
+    margin-left: 15px;
+
+}
+
+.classData {
+    color: grey;
+    margin-left: 20px;
+
+}
+
+.classContent {
+    margin-top: 25px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    width: 260px;
+    height: 20px;
+    background-color: rgba(128, 128, 128, 0.153);
+    margin-left: 20px;
+
+}
+
+.assignmentsBtn,
+.materialsBtn,
+.myGradesBtn {
+    color: rgba(87, 86, 86, 0.374);
+    width: 110px;
+    height: 30px;
+    margin: 0px;
+}
+
+.selectedTab {
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+
+}
+
+.assignmentsBtn:hover,
+.materialsBtn:hover,
+.myGradesBtn:hover {
+    cursor: pointer;
+    color: black;
+}

@@ -1,0 +1,85 @@
+.assignmentCard {
+    height: 6em;
+    width: 80%;
+    background-color: rgba(236, 255, 245, 255);
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+    align-items: space-between;
+    row-gap: 0px;
+    position: relative;
+}
+
+.titleDesc,
+.statusDetails {
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    height: 90%;
+}
+
+
+.description {
+    position: absolute;
+    color: grey;
+    top: 40%;
+    left: 1%;
+}
+
+
+.badgeIcon {
+    color: rgb(83, 83, 231);
+}
+
+.statusDetails {
+    align-items: center;
+}
+
+.status {
+    height: 20px;
+    width: 90px;
+    margin-right: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.059);
+    border-radius: 30%;
+    background-color: antiquewhite;
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+}
+
+
+
+.statusSubmitted {
+    color: rgb(83, 83, 231);
+    background-color: rgba(65, 105, 225, 0.1);
+}
+
+.statusNotSub {
+    color: rgb(133, 53, 53);
+}
+
+.statusGraded {
+    color: rgb(21, 153, 21);
+    background-color: rgba(127, 255, 212, 0.295);
+}
+
+.position {
+    margin-right: 5px;
+}
+
+.detailsBtn {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    color: grey;
+    margin-top: 3%;
+}
+
+.detailsBtn:hover {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
