@@ -1,0 +1,37 @@
+.actions {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5%;
+}
+
+.cancelBtn,
+.submitBtn {
+
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+
+}
+
+.cancelBtn {
+    background-color: rgba(198, 74, 74, 0.667);
+}
+
+.cancelBtn:hover {
+    background-color: #f44336;
+    cursor: pointer;
+}
+
+.submitBtn {
+    background-color: #79c47cac;
+
+}
+
+.submitBtn:hover {
+    background-color: #4CAF50;
+    /* Green */
+    cursor: pointer;
+}
