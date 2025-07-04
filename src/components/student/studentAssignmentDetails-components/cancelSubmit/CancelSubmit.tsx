@@ -1,10 +1,10 @@
 import classes from './cancelSubmit.module.css';
 
-const CancelSubmit = () => {
+const CancelSubmit = ({isUploaded}:{isUploaded:boolean}) => {
     return (
         <div className={classes.actions}>
             <button className={classes.cancelBtn}>Cancel</button>
-            <button className={classes.submitBtn}>Submit Assignment</button>
+            {isUploaded && <button className={classes.submitBtn}>Submit Assignment</button>}
         </div>
     )
 }

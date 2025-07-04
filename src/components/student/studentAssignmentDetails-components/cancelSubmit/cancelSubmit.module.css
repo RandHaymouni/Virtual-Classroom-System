@@ -17,21 +17,16 @@
 }
 
 .cancelBtn {
-    background-color: rgba(198, 74, 74, 0.667);
+    background-color: #f44336;
+   margin-right:  8%;
 }
 
-.cancelBtn:hover {
-    background-color: #f44336;
+.cancelBtn:hover ,.submitBtn:hover{
     cursor: pointer;
 }
 
 .submitBtn {
-    background-color: #79c47cac;
-
-}
-
-.submitBtn:hover {
     background-color: #4CAF50;
-    /* Green */
-    cursor: pointer;
+
 }
+
