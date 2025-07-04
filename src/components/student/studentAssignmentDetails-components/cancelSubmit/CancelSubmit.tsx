@@ -1,10 +1,13 @@
 import classes from './cancelSubmit.module.css';
-
-const CancelSubmit = ({isUploaded}:{isUploaded:boolean}) => {
+interface ICancel {
+    isUploaded: boolean;
+    handleCancel: () => void;
+}
+const CancelSubmit = (props: ICancel) => {
     return (
         <div className={classes.actions}>
-            <button className={classes.cancelBtn}>Cancel</button>
-            {isUploaded && <button className={classes.submitBtn}>Submit Assignment</button>}
+            <button className={classes.cancelBtn} onClick={props.handleCancel}>Cancel</button>
+            {props.isUploaded && <button className={classes.submitBtn} >Submit Assignment</button>}
         </div>
     )
 }

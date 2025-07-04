@@ -18,15 +18,16 @@
 
 .cancelBtn {
     background-color: #f44336;
-   margin-right:  8%;
+    margin-right: 8%;
 }
 
-.cancelBtn:hover ,.submitBtn:hover{
+.cancelBtn:hover,
+.submitBtn:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
 
 .submitBtn {
     background-color: #4CAF50;
 
 }
-

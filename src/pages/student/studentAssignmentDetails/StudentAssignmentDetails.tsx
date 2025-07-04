@@ -5,9 +5,10 @@ import AssignmentHeader from '../../../components/student/studentAssignmentDetai
 import classes from '../../../components/student/studentAssignmentDetails-components/header/assignmentHeader.module.css'
 import UploadFile from '../../../components/student/studentAssignmentDetails-components/uploadFile/UploadFile';
 import UpperHeader from '../../../components/student/studentAssignmentDetails-components/upperHeader/UpperHeader';
+
 const StudentAssignmentDetails = () => {
   const navigate = useNavigate();
-  const { isUploaded, component } = UploadFile();
+  const { cancelSub, isUploaded, uploadFileComponent } = UploadFile();
   return (
     <>
       <UpperHeader />
@@ -21,9 +22,9 @@ const StudentAssignmentDetails = () => {
             navigate('/StudentViewClass');
           }} />
 
-        {component} {/* UploadFile component */}
+        {uploadFileComponent}
         <CommentSection />
-        <CancelSubmit isUploaded={isUploaded} />
+        <CancelSubmit isUploaded={isUploaded} handleCancel={cancelSub} />
       </div>
 
     </>

@@ -1,12 +1,10 @@
 import { useRef, useState, type ChangeEvent, type MouseEvent, type DragEvent, useEffect } from "react";
 
-const useUploadFile = () => { 
+const useUploadFile = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [selectedFiles, setSelectedFiles] = useState<Array<string> | null>(null);
-   
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
-   
-   
+
     useEffect(() => {
         if (selectedFiles == null) {
             setIsUploaded(false);
@@ -16,12 +14,19 @@ const useUploadFile = () => {
         }
 
     }, [selectedFiles]);
+
+    const cancelSub = () => {
+        setSelectedFiles(null);
+    };
+
     const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     };
+
+
 
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +98,7 @@ const useUploadFile = () => {
 
 
     return {
+        cancelSub,
         fileInputRef,
         selectedFiles,
         isUploaded,
