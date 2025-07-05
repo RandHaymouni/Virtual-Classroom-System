@@ -1,0 +1,12 @@
+.container {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 1750px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content {
+  padding: 2rem 0;
+}

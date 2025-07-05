@@ -1,0 +1,105 @@
+.assignmentsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0;
+}
+
+.classesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.classCard {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.classHeader {
+  margin-bottom: 1rem;
+}
+
+.className {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.classCode {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.classStudents {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.recentSection {
+  margin-bottom: 1rem;
+}
+
+.recentLabel {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.recentAssignment {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 0.25rem;
+  border: 1px solid #e5e7eb;
+}
+
+.recentAssignmentTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.recentAssignmentDue {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.viewClassButton {
+  color: #3b82f6;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.joinClassButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: auto;
+}

@@ -1,0 +1,21 @@
+.footer {
+    text-align: center;
+    margin-top: 16px;      
+    margin-bottom: 48px;   
+}
+
+.footerText {
+    font-size: 12px;       
+    color: #9ca3af;
+    margin: 0;
+}
+
+.link {
+    color: #0d9488;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #0f766e;
+    text-decoration: underline;
+}
