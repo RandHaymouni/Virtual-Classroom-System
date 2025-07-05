@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+"use client"
+import { useState } from "react"
 import type React from "react"
+import { useNavigate } from "react-router-dom"
 import { ChevronLeft, RefreshCw } from "lucide-react"
 import styles from "./createClassForm.module.css"
-import { useNavigate } from "react-router"
 
 const CreateClassForm = () => {
     const navigate = useNavigate()
@@ -19,10 +20,6 @@ const CreateClassForm = () => {
             sendNotifications: true,
         },
     })
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target
@@ -62,12 +59,11 @@ const CreateClassForm = () => {
     }
 
     const handleBackToDashboard = () => {
-        window.scrollTo(0, 0)
         navigate("/teacherDashboard")
     }
 
     return (
-        <div className={styles.pageContainer}>
+        <div>
             <div className={styles.container}>
                 <button onClick={handleBackToDashboard} className={styles.backLink}>
                     <ChevronLeft className={styles.backIcon} />
