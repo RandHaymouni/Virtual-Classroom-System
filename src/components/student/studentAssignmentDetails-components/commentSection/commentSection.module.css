@@ -1,0 +1,26 @@
+.commentSection {
+    margin-left: 5%;
+    width: 80%;
+    height: 18%;
+    border: 1px dotted grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    row-gap: 10%;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.commentInput {
+    width: 80%;
+    height: 30%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 10px;
+    text-wrap: wrap;
+}
