@@ -1,0 +1,251 @@
+.container {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.exportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exportButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.exportIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.statTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+}
+
+.statSubtext {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.tableContainer {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gradesTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.headerCell {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.tableRow {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+  background: #f9fafb;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.studentCell,
+.gradeCell,
+.overallCell {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.studentInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.studentName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.performanceIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.performanceIcon.high {
+  color: #10b981;
+}
+
+.performanceIcon.medium {
+  color: #f59e0b;
+}
+
+.performanceIcon.low {
+  color: #ef4444;
+}
+
+.gradeCell {
+  font-size: 0.875rem;
+  color: #374151;
+  text-align: center;
+}
+
+.notSubmitted {
+  color: #f59e0b;
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.overallCell {
+  text-align: center;
+}
+
+.overallGrade {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding: 0.375rem 0.75rem;
+  background: #f3f4f6;
+  border-radius: 6px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .statsContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .gradesTable {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .exportButton {
+    justify-content: center;
+  }
+
+  .statCard {
+    padding: 1rem;
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .headerCell,
+  .studentCell,
+  .gradeCell,
+  .overallCell {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsContainer {
+    gap: 0.75rem;
+  }
+
+  .statCard {
+    padding: 0.75rem;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .gradesTable {
+    min-width: 600px;
+  }
+
+  .headerCell,
+  .studentCell,
+  .gradeCell,
+  .overallCell {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}

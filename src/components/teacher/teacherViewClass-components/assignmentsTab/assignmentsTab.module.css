@@ -1,0 +1,264 @@
+.container {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.createButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #1f2937;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.createButton:hover {
+  background: #111827;
+}
+
+.plusIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.assignmentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.assignmentCard {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.assignmentCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #d1d5db;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.assignmentInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+}
+
+.typeIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.activeIcon {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.gradedIcon {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.iconSymbol {
+  width: 18px;
+  height: 18px;
+}
+
+.assignmentDetails {
+  flex: 1;
+}
+
+.assignmentTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.assignmentMeta {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.8rem;
+  border-radius: 41px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border: 1px solid #d1d5db;
+}
+
+.statusActive {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.statusGraded {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.viewButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  color: #374151;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.viewIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.cardStats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.submissionStats,
+.gradeStats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 0.875rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .createButton {
+    justify-content: center;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cardActions {
+    margin-top: 15px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .cardStats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .assignmentInfo {
+    gap: 0.75rem;
+  }
+
+  .typeIcon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .iconSymbol {
+    width: 16px;
+    height: 16px;
+  }
+
+  .assignmentTitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .assignmentCard {
+    padding: 1rem;
+  }
+
+  .cardActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .viewButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
