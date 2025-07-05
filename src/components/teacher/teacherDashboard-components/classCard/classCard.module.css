@@ -16,6 +16,7 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Header section with colored background */
 .header {
   padding: 1.2rem 1.2rem 1.2rem 1.4rem;
   position: relative;
@@ -66,6 +67,7 @@
   height: 14px;
 } 
 
+/* Body section */
 .body {
   padding: 1.3rem;
   background: white;
@@ -74,6 +76,7 @@
   gap: 1.1rem;
 }
 
+/* Students info */
 .studentsInfo {
   display: flex;
   align-items: center;
@@ -92,6 +95,7 @@
   font-weight: 400;
 }
 
+/* Activity section */
 .activitySection {
   display: flex;
   flex-direction: column;
@@ -125,6 +129,7 @@
   margin-top: 2px;
 }
 
+/* Activity icon colors based on card color */
 .blue .activityIcon {
   color: #3b82f6;
 }
@@ -160,6 +165,7 @@
   line-height: 1.4;
 }
 
+/* View Class link section with divider */
 .viewSection {
   border-top: 1px solid #e5e7eb;
   padding-top: 0.3rem;
@@ -167,14 +173,11 @@
 }
 
 .viewLink {
-  background-color: white;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
   align-self: flex-start;
   transition: all 0.2s ease;
-  border: 0;
-  cursor: pointer;
 }
 
 .blue .viewLink {
