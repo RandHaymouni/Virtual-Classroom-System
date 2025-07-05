@@ -75,7 +75,7 @@ export const mockData = {
   ]
 };
 
-function StudentDashboard() {
+const StudentDashboard = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'classes' | 'assignments'>('overview');
 
   return (
