@@ -4,3 +4,9 @@ export interface IAssignmentHeader {
     points: string;
     dueDate: string;
 }
+export interface ISummary {
+    title: string;
+    count: number;
+    total?: number;
+    dueDate?: string;
+}

@@ -1,0 +1,26 @@
+.submitSummaryContainer {
+    width: 400px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    row-gap: 10px;
+}
+
+.summaryTitle,
+.summaryDetails,
+.dueDateDesc {
+    color: grey;
+}
+
+.summaryNumber,
+.dueDate {
+    color: rgb(110, 130, 11);
+}
+
+.dueDate {
+    font-weight: bold;
+}
