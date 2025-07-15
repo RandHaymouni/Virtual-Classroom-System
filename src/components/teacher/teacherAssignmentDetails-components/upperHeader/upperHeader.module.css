@@ -9,7 +9,6 @@
     border-width: 0;
     background: transparent;
     margin-bottom: 2%;
-    /* margin-left: 2%; */
     width: 180px;
 }
 
@@ -25,23 +24,18 @@
     margin-right: 5px;
     border: 1px solid rgba(0, 0, 0, 0.059);
     border-radius: 50%;
-    background-color: antiquewhite;
+    background-color: rgba(250, 235, 215, 0.364);
     text-align: center;
     align-content: center;
-    font-weight: bold;
+    font-weight: bolder;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.statusSubmitted {
-    color: rgb(83, 83, 231);
-    background-color: rgba(65, 105, 225, 0.1);
-}
-
-.statusNotSub {
+.notActive {
     color: rgb(133, 53, 53);
 }
 
-.statusGraded {
+.active {
     color: rgb(21, 153, 21);
     background-color: rgba(127, 255, 212, 0.295);
 }
