@@ -12,7 +12,6 @@ const Header = (props: IAssignmentHeader) => {
                     
                     <div className={classes.actions}>
                             <button className={classes.edit}>Edit</button>
-                            <button className={classes.duplicate}>Duplicate</button>
                     </div>
             </div>
     )

@@ -36,7 +36,7 @@
     display: flex;
     column-gap: 15%;
 }
-.edit,.duplicate{
+.edit{
     border: 1px solid grey;
     border-radius: 5px;
     background-color: transparent;
@@ -44,7 +44,7 @@
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-    width: 80px;
+    width: 100px;
     height: 30px;
     
 }
