@@ -77,3 +77,6 @@ tr {
     background-color: black;
     color: white;
 }
+.notFound{
+    color: rgb(133, 53, 53);
+}

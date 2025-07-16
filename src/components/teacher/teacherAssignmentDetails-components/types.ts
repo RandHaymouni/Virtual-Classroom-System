@@ -10,3 +10,10 @@ export interface ISummary {
     total?: number;
     dueDate?: string;
 }
+
+export interface IStudentSubmission {
+    id: string;
+    studentName: string;
+    submissionDate: string | null;
+    status: 'Submitted' | 'Not Submitted' | 'Graded';
+  }
