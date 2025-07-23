@@ -9,6 +9,7 @@ const TeacherViewClass = () => {
   return (
     <main>
       <TeacherclassView classId={id} />
+      
     </main>
   )
 }
