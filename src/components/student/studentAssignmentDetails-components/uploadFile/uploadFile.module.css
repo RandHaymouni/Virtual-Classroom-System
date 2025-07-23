@@ -1,0 +1,80 @@
+.uploadFileContainer {
+    margin: 1% 5% 5%;
+    border: 1px dotted grey;
+    width: 80%;
+    height: 30%;
+    align-items: center;
+    align-self: center;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5%;
+
+}
+
+.uploadIcon {
+    height: 30px;
+    width: 30px;
+    margin-top: 1%;
+}
+
+.uploadStatement {
+    font-weight: 600;
+}
+
+h6 {
+    color: grey;
+}
+
+.uploadBtn {
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    font-weight: 500;
+    border: 1px solid grey;
+}
+
+.uploadBtn:hover {
+    cursor: pointer;
+    color: rgb(21, 153, 21);
+    font-weight: 600;
+}
+
+.selectedFile {
+    color: rgb(86, 165, 8);
+    font-family: 'Arial Narrow Bold', sans-serif;
+}
+.selectedFile > h6 {
+    color: black;
+    font-size: small;
+    justify-self: center;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    column-gap: 8px;
+}
+.fileItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fileItem::before {
+    content: "●";
+    color: rgba(0, 0, 0, 0.708);
+    margin-right: 3px;
+}
+.fileName{
+    font-size: small;
+}
+.removeBtn{
+    background-color: transparent;
+    border: 1px solid grey;
+    margin-left: 5px;
+    color: red;
+    height: 13px;
+    width: 13px;
+    cursor: pointer;
+}

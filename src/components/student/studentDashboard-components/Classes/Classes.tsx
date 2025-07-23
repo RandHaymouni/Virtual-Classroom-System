@@ -3,7 +3,7 @@ import { mockData } from '../../../../pages/student/studentDashboard/StudentDash
 import styles from './Classes.module.css';
 import { useNavigate } from 'react-router';
 
-function Classes() {
+const Classes = () => {
   const getClassColors = (colorClass: string) => {
     const colorMap: { [key: string]: any } = {
       'bg-green-50 border-green-200': { backgroundColor: '#f0fdf4', borderColor: '#bbf7d0' },
