@@ -5,7 +5,7 @@ interface TabsProps {
   setActiveTab: (tab: 'overview' | 'classes' | 'assignments') => void;
 }
 
-function Tabs({ activeTab, setActiveTab }: TabsProps) {
+const Tabs = ({ activeTab, setActiveTab }: TabsProps) => {
   return (
     <div className={styles.tabs}>
       <button

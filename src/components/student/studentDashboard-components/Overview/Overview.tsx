@@ -6,7 +6,7 @@ interface overviewProps {
   setAvtiveTap: (tab: "overview" | "classes" | "assignments") => void
 }
 
-function Overview(props : overviewProps) {
+const Overview = (props : overviewProps) => {
   return (
     <div>
       <div className={styles.statsGrid}>
@@ -26,7 +26,6 @@ function Overview(props : overviewProps) {
           <div className={styles.statLabel}>Average Grade</div>
         </div>
       </div>
-
       <div className={styles.assignmentsCard}>
         <div className={styles.cardHeader}>
           <div className={styles.cardTitle}>Upcoming Assignments</div>

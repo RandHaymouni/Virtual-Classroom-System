@@ -37,7 +37,7 @@
 
 .header {
   margin-bottom: 2rem;
-  margin-top: 3rem; 
+  margin-top: 3rem; /* إضافة مسافة من الأعلى لتجنب تداخل الزر */
 }
 
 .title {
@@ -373,11 +373,13 @@
   }
 }
 
+/* Focus management for accessibility */
 .form *:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
+/* High contrast mode support */
 @media (prefers-contrast: high) {
   .input,
   .select,
@@ -390,6 +392,7 @@
   }
 }
 
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

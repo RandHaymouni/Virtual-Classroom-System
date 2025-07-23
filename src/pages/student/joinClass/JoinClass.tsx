@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Users } from 'lucide-react';
 import styles from './JoinClass.module.css';
 
-function JoinClass() {
+const JoinClass = () => {
   const navigate = useNavigate();
   const [enrollmentKey, setEnrollmentKey] = useState('');
 
@@ -17,9 +17,9 @@ function JoinClass() {
 
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate('/studentDashboard')}>
+      <div className={styles.backButton} onClick={() => navigate('/studentDashboard')}>
         ← Back to Dashboard
-      </button>
+      </div>
       <div className={styles.header}>
         <div className={styles.icon}>
           <Users size={40} />

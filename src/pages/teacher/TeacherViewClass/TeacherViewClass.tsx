@@ -9,9 +9,10 @@ const TeacherViewClass = () => {
   return (
     <main>
       <TeacherclassView classId={id} />
-      
+ 
     </main>
   )
 }
 
 export default TeacherViewClass
+

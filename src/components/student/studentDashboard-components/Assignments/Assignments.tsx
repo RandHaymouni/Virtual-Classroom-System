@@ -3,7 +3,7 @@ import { Clock } from 'lucide-react';
 import { mockData } from '../../../../pages/student/studentDashboard/StudentDashboard';
 import styles from './Assignments.module.css';
 
-function Assignments() {
+const Assignments = () => {
   const [filter, setFilter] = useState<'all' | 'high' | 'medium'>('all');
   const [sort, setSort] = useState<'dueDateAsc' | 'dueDateDesc' | 'pointsAsc' | 'pointsDesc'>('dueDateAsc');
 
