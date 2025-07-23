@@ -27,7 +27,7 @@ function App() {
         <Route path='/createClass' element={<CreateClass />} />
         <Route path='/teacherAssignmentDetails' element={<TeacherAssignmentDetails />} />
         <Route path='/teacherDashboard' element={<TeacherDashboard />} />
-        <Route path='/teacherViewClass' element={<TeacherViewClass />} />
+        <Route path='/class/:id' element={<TeacherViewClass />} />
       </Routes>
     </BrowserRouter>
   )

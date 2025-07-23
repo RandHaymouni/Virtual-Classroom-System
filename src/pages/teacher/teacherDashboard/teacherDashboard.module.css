@@ -72,6 +72,7 @@
   max-width: 100%;
 }
 
+/* Responsive Design */
 @media (min-width: 1024px) {
   .dashboard {
     grid-template-columns: repeat(3, minmax(320px, 350px));

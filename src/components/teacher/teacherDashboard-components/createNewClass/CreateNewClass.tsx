@@ -5,6 +5,7 @@ import { useNavigate } from "react-router"
 const CreateNewClass = () => {
   const navigate = useNavigate();
   const handleCreateClass = () => {
+    window.scrollTo(0, 0)
     navigate("/createClass")
   }
 
