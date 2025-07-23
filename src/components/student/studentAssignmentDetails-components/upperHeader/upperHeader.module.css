@@ -9,6 +9,8 @@
     border-width: 0;
     background: transparent;
     margin-bottom: 2%;
+    display: flex;
+    font-size: medium;
 }
 
 .backBtn:hover {
@@ -22,12 +24,11 @@
     width: 100px;
     margin-right: 5px;
     border: 1px solid rgba(0, 0, 0, 0.059);
-    border-radius: 50%;
+    border-radius: 45%;
     background-color: antiquewhite;
     text-align: center;
     align-content: center;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .statusSubmitted {

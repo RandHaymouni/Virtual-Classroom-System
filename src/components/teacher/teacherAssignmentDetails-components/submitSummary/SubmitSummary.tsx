@@ -1,21 +1,7 @@
 import classes from './submitSummary.module.css'
 import type {ISummary } from '../types';
-
-const percentage = (count: number, total: number) => {
-  if (total === 0) return 0;
-  return Math.round((count / total) * 100).toString();
-}
-const calcDays = (date: string): string => {
-  const dueDate = new Date(date);
-  const currentDate = new Date();
-  dueDate.setHours(0, 0, 0, 0);
-  currentDate.setHours(0, 0, 0, 0);
-
-  const timeDifference = dueDate.getTime() - currentDate.getTime();
-  const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-  return daysDifference > 0 ? `${Math.abs(daysDifference)} days ` : "Due today";
-
-};
+import useSubmitSummary from './useSubmitSummary.hook';
+const { calcDays, percentage } = useSubmitSummary();
 const SubmitSummary = (props: ISummary) => {
   return (
     <div className={classes.submitSummaryContainer}>
@@ -32,5 +18,4 @@ const SubmitSummary = (props: ISummary) => {
     </div>
   )
 }
-
 export default SubmitSummary

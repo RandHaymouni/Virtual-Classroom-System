@@ -1,12 +1,12 @@
 .classHeader {
     height: 130px;
-    width: 100%;
+    width: 90%;
     background-color: rgba(236, 255, 245, 255);
     margin-top: 0%;
     padding-top: 0%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     justify-content: flex-end;
-
+margin-left: 1%;
 }
 
 .id {
@@ -15,13 +15,15 @@
     margin: 1%;
 }
 
-
-
 .backBtn {
     background-color: transparent;
     border: none;
-    color: grey;
+    color: rgb(94, 94, 94);
     margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .backBtn:hover {
@@ -54,7 +56,7 @@
 .tabs {
     display: flex;
     justify-content: space-between;
-    width: 260px;
+    width: 280px;
     height: 20px;
     background-color: rgba(128, 128, 128, 0.153);
     margin-left: 20px;

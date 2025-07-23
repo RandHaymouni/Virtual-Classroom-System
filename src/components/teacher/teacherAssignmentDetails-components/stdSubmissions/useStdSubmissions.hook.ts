@@ -9,7 +9,6 @@ const useStdSubmissions = () => {
         console.log(`View submission for student with ID: ${id}`);
 
     }
-
     function handleGrade(id: any): void {
         console.log(`Grade submission for student with ID: ${id}`);
 
@@ -28,6 +27,7 @@ const useStdSubmissions = () => {
         }
         setParams(newParams);
     }
+
     useEffect(() => {
         const student = params.get('search') || '';
         if (!student) {
@@ -46,7 +46,33 @@ const useStdSubmissions = () => {
 
         }
     }, [params]);
-    return { handleView, handleGrade, handleSearch, filterStatus, filteredArray, params };
+
+    const handleFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newParams = new URLSearchParams(params);
+        if (event.target.value === 'all') {
+            newParams.delete('filter');
+        } else {
+            newParams.set('filter', event.target.value);
+        }
+        setParams(newParams);
+    }
+    useEffect(() => {
+        const filter = params.get('filter');
+        if (!filter || filter === 'all') {
+            setFilterStatus(0);
+            return;
+        }
+        const filteredStds = studentData.filter((std) => std.status.toLowerCase() === filter.toLowerCase());
+        if (filteredStds.length > 0) {
+            setFilterStatus(1);
+            setFilteredArray(filteredStds);
+        } else {
+            setFilterStatus(-1);
+            setFilteredArray([]);
+        }
+    }, [params]);
+
+    return { handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params };
 }
 
 export default useStdSubmissions;

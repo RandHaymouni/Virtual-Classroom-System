@@ -1,11 +1,9 @@
-import { FaFilter } from "react-icons/fa6";
 import classes from './StdSubmissions.module.css'
 import studentData from './data';
 import useStdSubmissions from "./useStdSubmissions.hook";
 
-
 const StdSubmissionsTable = () => {
-  const { handleView, handleGrade, handleSearch, filterStatus, filteredArray, params } = useStdSubmissions();
+  const { handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params } = useStdSubmissions();
 
   return (
     <div className={classes.StdSubContainer}>
@@ -14,7 +12,23 @@ const StdSubmissionsTable = () => {
         <h3 className={classes.title}>Students Submissions</h3>
         <div className={classes.actions}>
           <input type="search" placeholder='Search students...' onChange={handleSearch} className={classes.search} value={params.get('search') || ''} />
-          <button className={classes.filter}><FaFilter />Filter</button>
+      
+          <div >
+            <label htmlFor="filter">
+              Filter:
+            </label>
+            <select
+              id="filter"
+              value={params.get('filter') || ' '}
+              onChange={handleFilter}
+              className={classes.filter}
+            >
+              <option value="all">All</option>
+              <option value="Submitted">Submitted</option>
+              <option value="Not Submitted">Not Submitted</option>
+              <option value="Graded">Graded</option>
+            </select>
+          </div>
         </div>
       </div>
 

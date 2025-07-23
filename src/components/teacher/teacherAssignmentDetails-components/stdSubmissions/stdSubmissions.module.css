@@ -2,30 +2,25 @@
     margin: 2% 2%;
     width: 95%;
 }
-
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
 }
-
 .actions {
     display: flex;
     gap: 10px;
 }
-
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
 }
-
 tr {
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
-
 .statusSubmitted,
 .statusNotSub,
 .statusGraded {
@@ -34,9 +29,7 @@ tr {
     border-radius: 8px;
     font-size: small;
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 .statusSubmitted {
     color: rgb(83, 83, 231);
     background-color: rgba(65, 105, 225, 0.1);
@@ -55,10 +48,8 @@ tr {
 .viewGradeActions {
     display: flex;
     gap: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
-
 .viewGradeActions button {
     width: 75px;
     padding: 2px 3px;
@@ -67,16 +58,16 @@ tr {
     font-weight: 500;
     cursor: pointer;
 }
-
-
 .viewBtn {
     background-color: white;
 }
-
 .gradeBtn {
     background-color: black;
     color: white;
 }
 .notFound{
     color: rgb(133, 53, 53);
+}
+.filter{
+    height: 30px;
 }

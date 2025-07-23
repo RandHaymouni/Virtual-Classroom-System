@@ -4,5 +4,4 @@ export interface IAssignmentHeader{
     points: number;
     dueDate: string;
     description: string;
-    onBackClick: () => void;
 }

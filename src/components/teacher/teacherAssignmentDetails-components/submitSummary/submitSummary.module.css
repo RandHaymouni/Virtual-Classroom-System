@@ -13,14 +13,12 @@
 .summaryTitle,
 .summaryDetails,
 .dueDateDesc {
-    color: grey;
+        color: gray;
 }
-
 .summaryNumber,
 .dueDate {
-    color: rgb(110, 130, 11);
+    color: rgb(0, 0, 0);
 }
-
 .dueDate {
     font-weight: bold;
 }

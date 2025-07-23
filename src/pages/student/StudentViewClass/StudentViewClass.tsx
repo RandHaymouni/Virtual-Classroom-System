@@ -8,6 +8,8 @@ function StudentViewClass() {
                 classId="MTH101"
                 classDetails="Introduction to Mathematics" />}
             {<AssignmentCard type='Quiz' title='Algebra' description='optional assignment' dueDate='June,5th' points={5} status={'Not Submitted'} />}
+            {<AssignmentCard type='Assignment' title='Calculus' description='optional assignment' dueDate='June,5th' points={5} status={'Submitted'} submissionDate='June, 4th' />}
+            {<AssignmentCard type='Quiz' title='Algebra' description='optional assignment' dueDate='June,5th' points={5} status={'Graded'} grade={90} />}
         </>
     )
 }

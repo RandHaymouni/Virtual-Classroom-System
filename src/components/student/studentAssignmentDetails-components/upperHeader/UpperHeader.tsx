@@ -1,11 +1,10 @@
 import classes from './upperHeader.module.css';
 import { ArrowLeft } from "lucide-react";
-const assignmentStatus = "Submitted"; // This should be passed as a prop or derived from state
-const UpperHeader = () => {
+const UpperHeader = ({ assignmentStatus }: { assignmentStatus: string }) => {
     return (
         <div className={classes.upperHeader}>
             <button className={classes.backBtn} onClick={() => window.location.href = '/StudentViewClass'}>
-                <ArrowLeft className="yourCustomClass" /> Back to Assignments
+                <ArrowLeft /> Back to Assignments
             </button>
             <h5 className={`${classes.status} ${assignmentStatus === "Submitted" ?
                 classes.statusSubmitted :

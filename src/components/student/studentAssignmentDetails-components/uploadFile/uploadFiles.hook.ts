@@ -16,7 +16,20 @@ const useUploadFile = () => {
     }, [selectedFiles]);
 
     const cancelSub = () => {
-        setSelectedFiles(null);
+        if (selectedFiles?.length) {
+            setSelectedFiles(null);
+        }
+        else {
+            window.location.href = '/StudentViewClass';
+        }
+    };
+    const isTotalFileSizeLessThan10MB = (fileLists: FileList[]): boolean => {
+        const MAX_SIZE_BYTES = 10 * 1024 * 1024;
+        let totalSize = 0;
+        for (const fileList of fileLists) {
+            totalSize += Array.from(fileList).reduce((sum, file) => sum + file.size, 0);
+        }
+        return totalSize < MAX_SIZE_BYTES;
     };
 
     const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -25,16 +38,19 @@ const useUploadFile = () => {
             fileInputRef.current.click();
         }
     };
-
-
-
-
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
 
-        if (files && files.length > 0) {
-            processFiles(files);
-            event.target.value = '';
+        if (files && files.length > 0 ) {
+            const filesLength = isTotalFileSizeLessThan10MB([files as FileList]);
+            if (filesLength) {
+                processFiles(files);
+                event.target.value = '';
+            }
+            else {
+                alert('Total file size exceeds 10 MB. Please select smaller files.');
+                setSelectedFiles(null);
+            }
         } else {
             setSelectedFiles(null);
         }
@@ -54,7 +70,6 @@ const useUploadFile = () => {
         });
     };
 
-
     const removeFile = (index: number) => {
         if (selectedFiles) {
             const updatedFiles = [...selectedFiles];
@@ -63,7 +78,6 @@ const useUploadFile = () => {
         }
 
     }
-
 
     const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -76,7 +90,6 @@ const useUploadFile = () => {
     const handleDragLeave = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
     };
-
 
     const handleDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -95,7 +108,6 @@ const useUploadFile = () => {
             }
         }
     };
-
 
     return {
         cancelSub,
