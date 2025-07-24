@@ -13,7 +13,7 @@ const UpperHeader = ({ dueDate }: { dueDate: string }) => {
     return (
         <div className={classes.upperHeader}>
             <button className={classes.backBtn} onClick={() => window.location.href = '/TeacherViewClass'}>
-                <IoMdArrowRoundBack /> Back to Assignments
+                <IoMdArrowRoundBack /> <h5 >Back To All Assignments</h5>
             </button>
             <h5 className={`${classes.status} ${isActive === "Active" ?
                 classes.active : classes.notActive}`}>

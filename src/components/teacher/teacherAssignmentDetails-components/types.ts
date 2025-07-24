@@ -1,4 +1,5 @@
 export interface IAssignmentHeader {
+    type:string
     title: string;
     description: string;
     points: string;

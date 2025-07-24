@@ -3,7 +3,6 @@
     flex-direction: row;
     width: 100%;
     height: 25%;
-    
     justify-content: space-between;
 }
 
@@ -24,11 +23,15 @@
 
 .details {
     color: grey;
+    margin-top: 2%;
+    margin-left: 4%;
+    font-weight: 480;
 }
 
 .description {
     color: lightslategray;
-    margin-top: 3%;
+    margin-top: 2%;
+    margin-left: 4%;
 }
 .actions{
     margin-right: 3%;
@@ -46,8 +49,29 @@
     cursor: pointer;
     width: 100px;
     height: 30px;
-    
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 button:hover {
     background-color: rgba(0, 0, 0, 0.1);
+    font-size: small;
+}
+
+@media screen and (max-width: 768px) {
+    .headerContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .assignmentHeader {
+        align-items: center;
+        text-align: center;
+    }
+    .actions {
+        justify-content: center;
+        margin-right: 0;
+    }
+    .edit {
+        width: 80px;
+        height: 25px;
+    }
+    
 }
