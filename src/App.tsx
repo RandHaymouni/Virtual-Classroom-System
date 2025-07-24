@@ -13,12 +13,14 @@ import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/T
 import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard"
 import Navbar from './components/navbar/Navbar'
 import MainLayout from './layouts/MainLayout'
+import LandingPage from './pages/landingPage/LandingPage'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
         <Route path="/studentDashboard" element={<MainLayout><StudentDashboard /></MainLayout>} />
