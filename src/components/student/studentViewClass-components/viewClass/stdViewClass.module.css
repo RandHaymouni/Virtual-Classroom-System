@@ -7,6 +7,8 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     justify-content: flex-end;
 margin-left: 1%;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+border-radius: 20px;
 }
 
 .id {
@@ -18,10 +20,8 @@ margin-left: 1%;
 .backBtn {
     background-color: transparent;
     border: none;
-    color: rgb(94, 94, 94);
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    color: grey;
+    margin: 15px 10px 20px 25px;
     display: flex;
     align-items: center;
 }
@@ -29,13 +29,16 @@ margin-left: 1%;
 .backBtn:hover {
     cursor: pointer;
     color: black;
-
+    font-weight: bold;
+    background-color: transparent;
+    font-size: small;
 }
 
 .classInfo {
     justify-content: flex-end;
     row-gap: 0px;
     margin-left: 20px;
+    margin-top: 1%;
 }
 
 .classInfo>h1 {
@@ -51,18 +54,22 @@ margin-left: 1%;
 
 .classContent {
     margin-top: 25px;
+    margin-left: 25px;
 }
 
 .tabs {
     display: flex;
     justify-content: space-between;
-    width: 280px;
+    width: 290px;
     height: 20px;
-    background-color: rgba(128, 128, 128, 0.153);
-    margin-left: 20px;
-
+    background-color: transparent;
+    margin-left: 3px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.037);
+    column-gap: 10px;
 }
-
+.tabs >button{
+    border-radius: 10px;
+}
 .assignmentsBtn,
 .materialsBtn,
 .myGradesBtn {
@@ -84,4 +91,10 @@ margin-left: 1%;
 .myGradesBtn:hover {
     cursor: pointer;
     color: black;
+}
+.subHeader{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px 0px 20px 20px;
+    color: rgb(0, 0, 0);
 }

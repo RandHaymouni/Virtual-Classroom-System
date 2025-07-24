@@ -1,7 +1,6 @@
 .commentSection {
-    margin-left: 5%;
     width: 80%;
-    height: 18%;
+    height: 70px;
     border: 1px dotted grey;
     display: flex;
     flex-direction: column;
@@ -9,6 +8,7 @@
     align-self: center;
     justify-content: center;
     row-gap: 10%;
+    border-radius: 5px;
 }
 
 .title {
@@ -17,7 +17,7 @@
 
 .commentInput {
     width: 80%;
-    height: 30%;
+    height: 30px;
     border: 1px solid grey;
     border-radius: 5px;
     padding: 10px;

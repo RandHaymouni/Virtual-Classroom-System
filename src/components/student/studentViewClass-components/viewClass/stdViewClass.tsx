@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import classes from './stdViewClass.module.css'
 import type { IClassData } from '../types';
-import { ArrowLeft } from "lucide-react";
-
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { FiChevronsRight } from "react-icons/fi";
 const StdViewClass = (props: IClassData) => {
     const [selectedTab, setSelectedTab] = useState('assignments');
     return (
         <>
             <button className={classes.backBtn} onClick={() => window.location.href = '/studentDashboard'}>
-                <ArrowLeft /> <h5>Back to Dashboard</h5>
+                <IoMdArrowRoundBack /> <h5>Back to Dashboard</h5>
             </button>
             <div className={classes.classHeader}>
                 <div className={classes.classInfo}>
@@ -42,7 +42,7 @@ const StdViewClass = (props: IClassData) => {
 
                 </div>
 
-                <h2 style={{ margin: '40px 20px' }}>All Assignments</h2>
+                <h2 className={classes.subHeader} ><FiChevronsRight /> All Assignments</h2>
 
 
 

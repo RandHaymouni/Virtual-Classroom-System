@@ -26,7 +26,7 @@ const UploadFile = () => {
                     accept=".pdf,.docx,.zip,.jpg"
                     multiple
                 />
-                <button className={classes.uploadBtn} onClick={handleButtonClick}><FileSearch /> Choose Files</button>
+                <button className={classes.uploadBtn} onClick={handleButtonClick}><FileSearch /> <span>Choose Files</span></button>
                 <h6 className={classes.formats}>Supported formats: PDF, DOCX, ZIP, JPG (Max 10MB)</h6>
 
                 {selectedFiles != null && <div className={classes.selectedFile}>
@@ -40,7 +40,7 @@ const UploadFile = () => {
                                     className={classes.removeBtn}
                                     type="button"
                                 >
-                                    X
+                                    <h6 className={classes.x}>X</h6>
                                 </button>
                             </li>
                         ))}
