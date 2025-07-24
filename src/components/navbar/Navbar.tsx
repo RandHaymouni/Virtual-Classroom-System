@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 import { GraduationCap, User, Settings, LogOut } from "lucide-react"
 import styles from "./navbar.module.css"
+import { useNavigate } from "react-router"
 
 const Navbar = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 	const dropdownRef = useRef<HTMLDivElement>(null)
+	 const navigate = useNavigate()
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -24,24 +26,25 @@ const Navbar = () => {
 	}
 
 	const handleDropdownAction = (action: string) => {
-		console.log(`${action} clicked`)
-		setIsDropdownOpen(false)
+		 if (action === "Logout") {
+      localStorage.removeItem("token") 
+      navigate("/login");
+    } else {
+      console.log(`${action} clicked`);
+    }
+    setIsDropdownOpen(false);
 	}
 
 	return (
 		<>
-			{/* Main Navbar */}
 			<nav className={styles.navbar}>
 				<div className={styles.navbarContent}>
-					{/* Logo Section */}
 					<div className={styles.logoSection}>
 						<div className={styles.logoIcon}>
 							<GraduationCap />
 						</div>
 						<h1 className={styles.logoText}>EduClass</h1>
 					</div>
-
-					{/* Navigation Links */}
 					<div className={styles.navigation}>
 						<a href="#" className={`${styles.navLink} ${styles.active}`}>
 							Dashboard
@@ -53,14 +56,10 @@ const Navbar = () => {
 							Notifications
 						</a>
 					</div>
-
-					{/* User Section */}
 					<div className={styles.userSection} ref={dropdownRef}>
 						<button className={styles.userButton} onClick={handleUserClick}>
 							<div className={styles.userAvatar}>JS</div>
 						</button>
-
-						{/* User Dropdown */}
 						<div className={`${styles.userDropdown} ${!isDropdownOpen ? styles.hidden : ""}`}>
 							<div className={styles.userInfo}>
 								<p className={styles.userName}>John Smith</p>
@@ -87,10 +86,6 @@ const Navbar = () => {
 					</div>
 				</div>
 			</nav >
-
-			{/* Content Area with Sample Class Card
-			< div className={styles.contentArea} >
-			</div > */}
 		</>
 	)
 }

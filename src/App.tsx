@@ -11,6 +11,8 @@ import CreateAssignments from "./pages/teacher/createAssignments/CreateAssignmen
 import CreateClass from "./pages/teacher/createClass/CreateClass"
 import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/TeacherAssignmentDetails"
 import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard"
+import Navbar from './components/navbar/Navbar'
+import MainLayout from './layouts/MainLayout'
 
 function App() {
 
@@ -19,15 +21,17 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
-        <Route path='/joinClass' element={<JoinClass />} />
-        <Route path='/studentAssignmentDetails' element={<StudentAssignmentDetails />} />
-        <Route path='/studentDashboard' element={<StudentDashboard />} />
-        <Route path='/StudentViewClass' element={<StudentViewClass />} />
-        <Route path='/createAssignments' element={<CreateAssignments />} />
-        <Route path='/createClass' element={<CreateClass />} />
-        <Route path='/teacherAssignmentDetails' element={<TeacherAssignmentDetails />} />
-        <Route path='/teacherDashboard' element={<TeacherDashboard />} />
-        <Route path='/class/:id' element={<TeacherViewClass />} />
+        <Route path="/studentDashboard" element={<MainLayout><StudentDashboard /></MainLayout>} />
+        <Route path="/joinClass" element={<MainLayout><JoinClass /></MainLayout>} />
+        <Route path="/studentAssignmentDetails" element={<MainLayout><StudentAssignmentDetails /></MainLayout>} />
+        <Route path="/StudentViewClass" element={<MainLayout><StudentViewClass /></MainLayout>} />
+
+        <Route path="/teacherDashboard" element={<MainLayout><TeacherDashboard /></MainLayout>} />
+        <Route path="/createAssignments" element={<MainLayout><CreateAssignments /></MainLayout>} />
+        <Route path="/createClass" element={<MainLayout><CreateClass /></MainLayout>} />
+        <Route path="/teacherAssignmentDetails" element={<MainLayout><TeacherAssignmentDetails /></MainLayout>} />
+        <Route path="/class/:id" element={<MainLayout><TeacherViewClass /></MainLayout>} />
+        <Route path='/navbar' element={<Navbar />} />
       </Routes>
     </BrowserRouter>
   )
