@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ArrowLeft, Paperclip, FileText, Download } from "lucide-react"
 import styles from "./viewAssignmentsDetails.module.css"
-import SubmitGrade from "../submitGrade/submitGrade"
+import SubmitGrade from "../submitGrade/SubmitGrade"
 
 const ViewAssignmentsDetails = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
