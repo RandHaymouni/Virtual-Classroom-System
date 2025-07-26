@@ -27,7 +27,7 @@
 .headerIcon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #272a2d 0%, #171717 100%);
+  background-color: #0d9488;
   border-radius: 20px;
   display: flex;
   align-items: center;
