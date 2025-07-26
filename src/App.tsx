@@ -11,7 +11,6 @@ import CreateAssignments from "./pages/teacher/createAssignments/CreateAssignmen
 import CreateClass from "./pages/teacher/createClass/CreateClass"
 import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/TeacherAssignmentDetails"
 import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard"
-import Navbar from './components/navbar/Navbar'
 import MainLayout from './layouts/MainLayout'
 import ViewAssignmentsDetails from './components/teacher/createAssignments-components/viewAssignments/viewAssignmentsDetails/ViewAssignmentsDetails'
 import LandingPage from './pages/landingPage/LandingPage'
@@ -35,7 +34,6 @@ function App() {
         <Route path="/teacherAssignmentDetails" element={<MainLayout><TeacherAssignmentDetails /></MainLayout>} />
         <Route path="/class/:id" element={<MainLayout><TeacherViewClass /></MainLayout>} />
         <Route path="/viewAssignmentsDetails" element={<MainLayout><ViewAssignmentsDetails /></MainLayout>} />
-        <Route path='/navbar' element={<Navbar />} />
       </Routes>
     </BrowserRouter>
   )
