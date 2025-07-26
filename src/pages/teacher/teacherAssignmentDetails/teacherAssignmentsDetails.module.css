@@ -1,15 +1,41 @@
+.pageContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f3f4f6;
+}
 .container {
     width: 80em;
     height: auto;
-    border: 1px solid grey;
-    border-radius: 1%;
-    margin: 0% 1% 2% 1%;
+    border: 1px solid #e5e7eb;
+    border-radius: 2%;
+    margin: 0% 0% 2% 1%;
     background-color: rgba(236, 255, 245, 255);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
 }
 .summaryContainer{
 display: flex;
     justify-content: space-between;
-    margin: 3% 1% 1% 1%;
+    margin: 2% 1% 2% 1%;
+}
+@media screen and (max-width: 768px) {
+    .pageContainer {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+    }
+    .container {
+        width: 98%;
+        margin-top: 2%;
+    border-radius: 10px;
+    }
+    .summaryContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
 }

@@ -1,6 +1,7 @@
 .uploadFileContainer {
     margin: 1% 5% 5%;
     border: 1px dotted grey;
+    border-radius: 5px;
     width: 80%;
     height: 35%;
     align-items: center;
@@ -24,6 +25,7 @@
 
 h6 {
     color: grey;
+    font-weight: 500;
 }
 
 .uploadBtn {
@@ -32,12 +34,17 @@ h6 {
     background-color: rgb(255, 255, 255);
     font-weight: 500;
     border: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .uploadBtn:hover {
     cursor: pointer;
     color: rgb(21, 153, 21);
     font-weight: 600;
+    font-size: small;
 }
 
 .selectedFile {
@@ -72,8 +79,12 @@ ul{
     background-color: transparent;
     border: 1px solid grey;
     margin-left: 5px;
-    color: red;
     height: 13px;
     width: 13px;
     cursor: pointer;
+}
+.x{
+    color: red;
+    font-size: x-small;
+    margin: 0;
 }

@@ -1,5 +1,4 @@
 .assignmentHeader {
-    margin: 1%;
     padding: 2%;
     display: flex;
     flex-direction: column;
@@ -14,9 +13,33 @@
 
 .details {
     color: grey;
+    margin-top: 1%;
+    margin-left: 4%;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 .description {
     color: lightslategray;
-    margin-top: 2%;
+    margin-top: 1%;
+    margin-left: 4%;
+}
+
+@media screen and (max-width: 768px) {
+    .assignmentHeader {
+        align-items: center;
+        text-align: center;
+    }
+
+    .title,
+    .details {
+        font-size: medium;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .description {
+        font-size: small;
+        margin-bottom: 5px;
+    }
 }

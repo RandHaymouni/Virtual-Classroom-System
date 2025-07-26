@@ -5,12 +5,11 @@ import React from 'react'
 import studentData from "./data";
 
 const useStdSubmissions = () => {
-    function handleView(id: any): void {
-        console.log(`View submission for student with ID: ${id}`);
-
+    function handleView(id:string): void {
+        window.location.href = `/viewAssignmentsDetails?studentId=${id}`;
     }
-    function handleGrade(id: any): void {
-        console.log(`Grade submission for student with ID: ${id}`);
+    function handleGrade(student: IStudentSubmission): void {
+        console.log(`Grade submission for student with ID: ${student.id}`);
 
     }
     const [params, setParams] = useSearchParams();

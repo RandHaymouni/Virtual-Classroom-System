@@ -4,24 +4,24 @@ import AssignmentHeader from '../../../components/student/studentAssignmentDetai
 import classes from './StudentAssignmentDetails.module.css';
 import UploadFile from '../../../components/student/studentAssignmentDetails-components/uploadFile/UploadFile';
 import UpperHeader from '../../../components/student/studentAssignmentDetails-components/upperHeader/UpperHeader';
-const isSubmitted:boolean = false; // This should be replaced with actual logic to determine if the assignment is submitted
+const isSubmitted: boolean = false;
 const StudentAssignmentDetails = () => {
   const { cancelSub, isUploaded, uploadFileComponent } = UploadFile();
   return (
     <>
-      <UpperHeader assignmentStatus={isSubmitted?"Submitted":"Not Submitted"} />
+      <UpperHeader assignmentStatus={isSubmitted ? "Submitted" : "Not Submitted"} />
       <div className={classes.container}>
         < AssignmentHeader assignmentStatus="Graded"
           title="React Component Development Assignment"
           points={100}
           dueDate="July 15, 2025"
           description="Create a responsive React component using TypeScript and CSS modules. The component should handle user interactions and display assignment status dynamically."
-          />
+        />
         {uploadFileComponent}
         <CommentSection />
         {!isSubmitted &&
-         <CancelSubmit isUploaded={isUploaded} handleCancel={cancelSub} />
-          }
+          <CancelSubmit isUploaded={isUploaded} handleCancel={cancelSub} />
+        }
       </div>
     </>
 

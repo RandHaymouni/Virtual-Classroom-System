@@ -10,12 +10,15 @@
     position: relative;
     margin-left: 1%;
     margin-bottom: 1%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.titleDesc{
+
+.titleDesc {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 13px;
 }
+
 .titleDesc,
 .statusDetails {
     position: absolute;
@@ -26,44 +29,53 @@
     margin-left: 5%;
     height: 90%;
 }
+
 .description {
     position: absolute;
     color: grey;
     top: 40%;
-    left: 1%;
+    left: 20px;
+    font-weight: 500;
 }
+
 .badgeIcon {
     color: rgb(83, 83, 231);
 }
+
 .statusDetails {
     align-items: center;
 }
+
 .status {
-    height: 25px;
+    height: 22px;
     width: 100px;
     margin-right: 5px;
     border: 1px solid rgba(0, 0, 0, 0.059);
-    border-radius: 30%;
+    border-radius: 30px;
     background-color: antiquewhite;
     text-align: center;
     align-content: center;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 15px;
 }
+
 .statusSubmitted {
     color: rgb(83, 83, 231);
     background-color: rgba(65, 105, 225, 0.1);
 }
-.submittedOn{
+
+.submittedOn {
     color: rgb(83, 83, 231);
-    margin-top: 28px ;
-    margin-left: 18px ;
+    margin-top: 28px;
+    margin-left: 18px;
 }
-.Graded{
+
+.Graded {
     color: rgb(21, 153, 21);
-    margin-top: 28px ;
-    margin-left: 18px ;
+    margin-top: 25px;
+    margin-left: 18px;
 }
+
 .statusNotSub {
     color: rgb(133, 53, 53);
 }
@@ -76,6 +88,7 @@
 .position {
     margin-right: 5px;
 }
+
 .detailsBtn {
     position: absolute;
     background-color: transparent;
@@ -83,8 +96,48 @@
     color: grey;
     margin-top: 3%;
 }
+
 .detailsBtn:hover {
     cursor: pointer;
     color: black;
     font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .assignmentCard {
+        width: 90%;
+        height: 100px;
+        align-items: center;
+    }
+
+    .titleDesc {
+        width: 100%;
+        margin-left: 10px;
+        font-size: medium;
+    }
+
+    .statusDetails {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .description {
+        font-size: 14px;
+        font-size: x-small;
+    }
+
+    .detailsBtn {
+        bottom: 9%
+    }
+
+    .status {
+        height: 20px;
+        width: 90px;
+        font-size: x-small;
+    }
+
+    .submittedOn {
+        margin-top: 6%;
+    }
 }

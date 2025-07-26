@@ -12,12 +12,16 @@ import CreateClass from "./pages/teacher/createClass/CreateClass"
 import TeacherAssignmentDetails from "./pages/teacher/teacherAssignmentDetails/TeacherAssignmentDetails"
 import TeacherDashboard from "./pages/teacher/teacherDashboard/TeacherDashboard"
 import MainLayout from './layouts/MainLayout'
+import ViewAssignmentsDetails from './components/teacher/createAssignments-components/viewAssignments/viewAssignmentsDetails/ViewAssignmentsDetails'
+import LandingPage from './pages/landingPage/LandingPage'
+
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
         <Route path="/studentDashboard" element={<MainLayout><StudentDashboard /></MainLayout>} />
@@ -29,6 +33,7 @@ function App() {
         <Route path="/createClass" element={<MainLayout><CreateClass /></MainLayout>} />
         <Route path="/teacherAssignmentDetails" element={<MainLayout><TeacherAssignmentDetails /></MainLayout>} />
         <Route path="/class/:id" element={<MainLayout><TeacherViewClass /></MainLayout>} />
+        <Route path="/viewAssignmentsDetails" element={<MainLayout><ViewAssignmentsDetails /></MainLayout>} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,5 +1,5 @@
 .submitSummaryContainer {
-    width: 400px;
+    width: 380px;
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -8,12 +8,14 @@
     border: 1px solid grey;
     border-radius: 10px;
     row-gap: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.138);
 }
 
 .summaryTitle,
 .summaryDetails,
 .dueDateDesc {
         color: gray;
+        font-weight: 500;
 }
 .summaryNumber,
 .dueDate {
@@ -21,4 +23,24 @@
 }
 .dueDate {
     font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .submitSummaryContainer {
+        width: 90%;
+        height: auto;
+        padding: 10px;
+        margin: 0 auto;
+        margin-bottom: 2%;
+    }
+    .summaryTitle,
+    .summaryDetails,
+    .dueDateDesc {
+        font-size: 14px;
+    }
+    .summaryNumber,
+    .dueDate {
+        font-size: 16px;
+    }
+    
 }
