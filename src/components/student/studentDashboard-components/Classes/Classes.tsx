@@ -47,7 +47,12 @@ const Classes = () => {
                 </div>
               </div>
             </div>
-            <button className={styles.viewClassButton}>View Class</button>
+              <button 
+                className={styles.viewClassButton}
+                onClick={() => navigate(`/studentviewclass`)}
+              >
+                View Class
+              </button>
           </div>
         ))}
       </div>
