@@ -1,11 +1,25 @@
 import { Plus, ExternalLink, Clock, CheckCircle } from "lucide-react"
 import styles from "./assignmentsTab.module.css"
-
+import { useNavigate } from "react-router"
 interface AssignmentsTabProps {
     classId: string
 }
+interface AssignmentInterface {
+    id: number
+    title: string
+    type: "Project" | "Quiz" | "Assignment" | "Exam"
+    points: number
+    dueDate: string
+    submitted: number
+    total: number
+    status: string
+    avgScore: {
+        current: number
+        total: number
+    } | null
+}
 
-const mockAssignments = [
+const mockAssignments: AssignmentInterface[] = [
     {
         id: 1,
         title: "Final Project: Building a Web Application",
@@ -54,6 +68,8 @@ const mockAssignments = [
 
 const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
 
+    const navigate = useNavigate();
+
     const getStatusBadge = (status: string) => {
         const baseClass = styles.statusBadge
         if (status === "Active") {
@@ -65,7 +81,7 @@ const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
     }
 
     const getTypeIcon = (status: string) => {
-        const isGraded = status === "Graded"
+        const isGraded = status === "Graded";
 
         return (
             <div className={`${styles.typeIcon} ${isGraded ? styles.gradedIcon : styles.activeIcon}`}>
@@ -75,8 +91,14 @@ const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
     }
 
     const handleCreateAssignment = () => {
-        window.scrollTo(0, 0)
-        console.log("Create Assignment clicked")
+        window.scrollTo(0, 0);
+        console.log("Create Assignment clicked");
+        navigate("/createAssignments");
+    }
+
+    const handleViewDetails = () => {
+        window.scrollTo(0, 0);
+        navigate("/teacherAssignmentDetails");
     }
 
     return (
@@ -106,7 +128,7 @@ const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
                                 <span className={getStatusBadge(assignment.status)}>
                                     {assignment.status}
                                 </span>
-                                <button className={styles.viewButton}>
+                                <button onClick={handleViewDetails} className={styles.viewButton}>
                                     <ExternalLink className={styles.viewIcon} />
                                     View Details
                                 </button>

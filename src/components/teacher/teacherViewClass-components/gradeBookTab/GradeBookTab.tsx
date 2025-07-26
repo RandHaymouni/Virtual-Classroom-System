@@ -1,11 +1,37 @@
 import { Download, TrendingUp, TrendingDown, Minus } from "lucide-react"
 import styles from "./gradeBookTab.module.css"
 
-interface GradebookTabProps {
+interface IGradebookTabProps {
     classId: string
 }
 
-const mockGrades = [
+interface IStudentGrade {
+    studentId: number
+    studentName: string
+    quiz1: {
+        score: number;
+        total: number;
+    } | null
+    quiz2: {
+        score: number;
+        total: number;
+    } | null
+    quiz3: {
+        score: number;
+        total: number;
+    } | null
+    midterm: {
+        score: number;
+        total: number;
+    } | null
+    finalProject: {
+        score: number;
+        total: number;
+    } | null
+    overall: number
+};
+
+const mockGrades: IStudentGrade[] = [
     {
         studentId: 1,
         studentName: "Student Name 1",
@@ -64,7 +90,7 @@ const classStats = {
     lowest: 72,
 }
 
-const GradeBookTab = ({ classId }: GradebookTabProps) => {
+const GradeBookTab = ({ classId }: IGradebookTabProps) => {
     const renderGrade = (grade: { score: number; total: number } | null) => {
         if (!grade) {
             return <span className={styles.notSubmitted}>Not submitted</span>
@@ -83,8 +109,8 @@ const GradeBookTab = ({ classId }: GradebookTabProps) => {
     }
 
     const handleExportGrades = () => {
-        window.scrollTo(0, 0)
-        console.log("Export Grades clicked")
+        window.scrollTo(0, 0);
+        console.log("Export Grades clicked");
     }
 
     return (
