@@ -3,18 +3,35 @@ import { useEffect, useState } from "react";
 import type { IStudentSubmission } from "../types";
 import React from 'react'
 import studentData from "./data";
-
 const useStdSubmissions = () => {
-    function handleView(id:string): void {
-        window.location.href = `/viewAssignmentsDetails?studentId=${id}`;
-    }
-    function handleGrade(student: IStudentSubmission): void {
-        console.log(`Grade submission for student with ID: ${student.id}`);
-
-    }
+    const [showGradeModal, setShowGradeModal] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState<IStudentSubmission | null>(null);
+    const [grade, setGrade] = useState('');
+    const [feedback, setFeedback] = useState('');
     const [params, setParams] = useSearchParams();
     const [filterStatus, setFilterStatus] = useState<number>(0);
     const [filteredArray, setFilteredArray] = useState<IStudentSubmission[]>([]);
+    function handleView(id: string): void {
+        window.location.href = `/viewAssignmentsDetails?studentId=${id}`;
+    }
+    function handleGrade(student: IStudentSubmission): void {
+        setSelectedStudent(student);
+        setShowGradeModal(true);
+        setGrade('');
+        setFeedback('');
+    }
+    const handleCloseGradeModal = () => {
+        setShowGradeModal(false);
+        setSelectedStudent(null);
+        setGrade('');
+        setFeedback('');
+    };
+    const handleSubmitGrade = () => {
+        if (!selectedStudent) return;
+        handleCloseGradeModal();
+        alert(`Grade ${grade} submitted for ${selectedStudent.studentName}`);
+    }
+
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newParams = new URLSearchParams(params);
         newParams.set('search', event.target.value);
@@ -26,7 +43,6 @@ const useStdSubmissions = () => {
         }
         setParams(newParams);
     }
-
     useEffect(() => {
         const student = params.get('search') || '';
         if (!student) {
@@ -42,10 +58,8 @@ const useStdSubmissions = () => {
         } else {
             setFilterStatus(-1);
             setFilteredArray([]);
-
         }
     }, [params]);
-
     const handleFilter = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newParams = new URLSearchParams(params);
         if (event.target.value === 'all') {
@@ -70,8 +84,16 @@ const useStdSubmissions = () => {
             setFilteredArray([]);
         }
     }, [params]);
-
-    return { handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params };
+    return {
+        handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params,
+        showGradeModal,
+        selectedStudent,
+        grade,
+        feedback,
+        setGrade,
+        setFeedback,
+        handleCloseGradeModal,
+        handleSubmitGrade
+    };
 }
-
 export default useStdSubmissions;

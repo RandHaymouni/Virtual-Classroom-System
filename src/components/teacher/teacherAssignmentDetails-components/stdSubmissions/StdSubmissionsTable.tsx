@@ -1,19 +1,24 @@
+import SubmitGrade from '../../createAssignments-components/viewAssignments/submitGrade/SubmitGrade';
 import classes from './StdSubmissions.module.css'
 import studentData from './data';
 import useStdSubmissions from "./useStdSubmissions.hook";
-
 const StdSubmissionsTable = () => {
-  const { handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params } = useStdSubmissions();
-
+  const { handleView, handleGrade, handleSearch, handleFilter, filterStatus, filteredArray, params, showGradeModal, selectedStudent,
+    grade,
+    feedback,
+    setGrade,
+    setFeedback,
+    handleCloseGradeModal,
+    handleSubmitGrade } = useStdSubmissions();
   return (
     <span>
-        <hr />
+      <hr />
       <div className={classes.StdSubContainer}>
         <div className={classes.header}>
           <h3 className={classes.title}>Students Submissions</h3>
           <div className={classes.actions}>
-            <input type="search" placeholder='  Search students...' onChange={handleSearch} className={classes.search} value={params.get('search') || ''} />
-            <div className={classes.filterContainer}>      
+            <input type="search" placeholder='  Search students...' onChange={handleSearch} className={classes.search} value={params.get('search') || ''} />
+            <div className={classes.filterContainer}>
               <select
                 id="filter"
                 value={params.get('filter') || ' '}
@@ -87,9 +92,20 @@ const StdSubmissionsTable = () => {
           </tbody>
         </table>
       </div>
+      {showGradeModal && selectedStudent && (
+        <SubmitGrade
+          studentName={selectedStudent.studentName}
+          assignmentTitle="Current Assignment"
+          grade={grade}
+          feedback={feedback}
+          setGrade={setGrade}
+          setFeedback={setFeedback}
+          onClose={handleCloseGradeModal}
+          onSubmit={handleSubmitGrade}
+        />
+      )}
     </span>
 
   )
 }
-
 export default StdSubmissionsTable
