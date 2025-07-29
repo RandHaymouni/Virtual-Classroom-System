@@ -2,6 +2,7 @@ export interface IClassData {
     className: string;
     classId: string;
     classDetails: string;
+    onTabChange: (tabName: string) => void;
 }
 export interface IAssignmentData {
     type: string;
@@ -12,4 +13,15 @@ export interface IAssignmentData {
     status: 'Not Submitted' | 'Submitted' | 'Graded';
     submissionDate?: string;
     grade?: number;
+}
+export interface IMaterial {
+    id: number
+    title: string
+    type: "video" | "document" | "presentation"
+    size: string
+    uploadDate: string
+    uploadedBy: string
+    downloads: number
+    category: string
+    description: string
 }

@@ -5,6 +5,10 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { FiChevronsRight } from "react-icons/fi";
 const StdViewClass = (props: IClassData) => {
     const [selectedTab, setSelectedTab] = useState('assignments');
+    const handleTabClick = (tabName: string) => {
+        setSelectedTab(tabName);
+        props.onTabChange(tabName); 
+    };
     return (
         <>
             <button className={classes.backBtn} onClick={() => window.location.href = '/studentDashboard'}>
@@ -21,21 +25,21 @@ const StdViewClass = (props: IClassData) => {
                 <div className={classes.tabs}>
                     <button
                         className={`${classes.assignmentsBtn} ${selectedTab === 'assignments' ? classes.selectedTab : ''}`}
-                        onClick={() => setSelectedTab('assignments')}
+                        onClick={() => handleTabClick('assignments')}
                     >
                         Assignments
                     </button>
 
                     <button
                         className={`${classes.materialsBtn} ${selectedTab === 'materials' ? classes.selectedTab : ''}`}
-                        onClick={() => setSelectedTab('materials')}
+                        onClick={() => handleTabClick('materials')}
                     >
                         Materials
                     </button>
 
                     <button
                         className={`${classes.myGradesBtn} ${selectedTab === 'myGrades' ? classes.selectedTab : ''}`}
-                        onClick={() => setSelectedTab('myGrades')}
+                        onClick={() => handleTabClick('myGrades')}
                     >
                         My Grades
                     </button>
