@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Paperclip } from 'lucide-react';
 import styles from './createAssignments.module.css';
+import { useNavigate } from 'react-router';
 
 const CreateAssignment = () => {
   const [title, setTitle] = useState('');
@@ -8,11 +9,12 @@ const CreateAssignment = () => {
   const [points, setPoints] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [instructions, setInstructions] = useState('');
+  const navigate = useNavigate()
 
   return (
     <div className={styles.container}>
-        <div className={styles.backLink}>
-            ← Back to Web Development 101
+        <div className={styles.backLink} onClick={() => navigate("/teacherDashboard")}>
+            ← Back to Dashboared
         </div>
         <div className={styles.card}>
             <div className={styles.cardBody}>
