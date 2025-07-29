@@ -1,0 +1,6 @@
+###
+To Get Started 
+1- run "npm i" to isntall the dependancies from the package file
+2- run the project using "npm run dev"
+good luck on your tasks
+###
