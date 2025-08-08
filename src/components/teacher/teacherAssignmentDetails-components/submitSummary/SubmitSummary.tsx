@@ -1,5 +1,5 @@
 import classes from './submitSummary.module.css'
-import type {ISummary } from '../types';
+import type { ISummary } from '../types';
 import useSubmitSummary from './useSubmitSummary.hook';
 const { calcDays, percentage } = useSubmitSummary();
 const SubmitSummary = (props: ISummary) => {
@@ -8,7 +8,7 @@ const SubmitSummary = (props: ISummary) => {
       <h5 className={classes.summaryTitle}>{props.title}</h5>
       {props.total &&
         <h1 className={classes.summaryNumber}>{props.count}/{props.total}</h1>}
-      {props.total &&
+      {props.total && props.count &&
         <h6 className={classes.summaryDetails}>{percentage(props.count, props.total)}% Complete </h6>}
       {props.dueDate ?
         <h1 className={classes.dueDate}>{calcDays(props.dueDate)} </h1> :

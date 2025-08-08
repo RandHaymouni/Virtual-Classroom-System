@@ -3,24 +3,39 @@ import Header from '../../../components/teacher/teacherAssignmentDetails-compone
 import classes from './teacherAssignmentsDetails.module.css'
 import StdSubmissions from '../../../components/teacher/teacherAssignmentDetails-components/stdSubmissions/StdSubmissionsTable.tsx'
 import SubmitSummary from '../../../components/teacher/teacherAssignmentDetails-components/submitSummary/SubmitSummary.tsx'
+import { useEffect, useState } from "react";
+import { type IAssignment, defaultAssignment } from './types.ts';
+import { useParams } from 'react-router-dom'
 const TeacherAssignmentDetails = () => {
+    const { id: assignmentId } = useParams<{ id: string }>();
+    const [assignment, setAssignment] = useState<IAssignment>(defaultAssignment);
+    useEffect(() => {
+        fetch(`http://localhost:5000/teacherAssignmentDetails/:${assignmentId}`)
+            .then(res => res.json())
+            .then(data => {
+                setAssignment(data);
+            })
+            .catch(err => {
+                console.error("Error fetching assignment:", err);
+            });
+    }, [assignmentId]);
     return (
         <span className={classes.pageContainer}>
-            <UpperHeader dueDate='July,18,2025' />
+            <UpperHeader dueDate={assignment?.dueDate} />
             <span className={classes.container}>
                 <Header
                     type='Assignment'
-                    title='React Quiz'
-                    description='Design a simple React component that displays a list of items. Use props and state to manage the list, and style it using CSS modules.'
-                    points='100 Points'
-                    dueDate='June, 5'
+                    title={assignment?.name}
+                    description={assignment?.description}
+                    points={`${assignment?.points} Points`}
+                    dueDate={assignment?.dueDate}
                 />
                 <span className={classes.summaryContainer}>
-                    <SubmitSummary title='Submissions' count={18} total={32} />
-                    <SubmitSummary title='Graded' count={8} total={10} />
-                    <SubmitSummary title='Time Remaining' count={18} dueDate="July 15, 2025" />
+                    <SubmitSummary title='Submissions' count={assignment?.submissions.length} total={assignment?.submissions.length} />
+                    <SubmitSummary title='Graded' count={assignment?.submissions.filter(sub => sub.status === "Graded").length} total={assignment?.submissions.length} />
+                    <SubmitSummary title='Time Remaining' dueDate={assignment?.dueDate} />
                 </span>
-      
+
                 <StdSubmissions />
             </span>
         </span>

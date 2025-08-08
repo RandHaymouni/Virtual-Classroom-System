@@ -31,7 +31,7 @@ function App() {
         <Route path="/teacherDashboard" element={<MainLayout><TeacherDashboard /></MainLayout>} />
         <Route path="/createAssignments" element={<MainLayout><CreateAssignments /></MainLayout>} />
         <Route path="/createClass" element={<MainLayout><CreateClass /></MainLayout>} />
-        <Route path="/teacherAssignmentDetails" element={<MainLayout><TeacherAssignmentDetails /></MainLayout>} />
+        <Route path="//teacherAssignmentDetails/:id" element={<MainLayout><TeacherAssignmentDetails /></MainLayout>} />
         <Route path="/class/:id" element={<MainLayout><TeacherViewClass /></MainLayout>} />
         <Route path="/viewAssignmentsDetails" element={<MainLayout><ViewAssignmentsDetails /></MainLayout>} />
       </Routes>
