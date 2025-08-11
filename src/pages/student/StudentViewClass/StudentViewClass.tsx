@@ -58,10 +58,6 @@ export default function Page() {
                         <div className={classes.contentSection}>
                             <div className={classes.sectionHeader}>
                                 <h2 className={classes.sectionTitle}>All Assignments</h2>
-                                <div className={classes.sectionActions}>
-                                    <button className={classes.filterBtn}>Filter</button>
-                                    <button className={classes.sortBtn}>Sort</button>
-                                </div>
                             </div>
                         </div>
                         {sampleAssignments.map((assignment) => (
