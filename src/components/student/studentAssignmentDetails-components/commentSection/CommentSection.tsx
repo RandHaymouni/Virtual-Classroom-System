@@ -1,9 +1,11 @@
-import { useState } from "react"
-import styles from "./commentSection.module.css"
+import styles from "./commentSection.module.css";
 
-const CommentSection = () => {
-  const [comments, setComments] = useState("")
+interface CommentSectionProps {
+  comments: string;
+  setComments: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const CommentSection = ({ comments, setComments }: CommentSectionProps) => {
   return (
     <div className={styles.commentSection}>
       <h3 className={styles.title}>Comments (optional)</h3>
@@ -14,7 +16,7 @@ const CommentSection = () => {
         className={styles.textarea}
       />
     </div>
-  )
-}
+  );
+};
 
 export default CommentSection;
