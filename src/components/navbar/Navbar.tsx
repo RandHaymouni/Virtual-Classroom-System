@@ -6,7 +6,7 @@ import { useNavigate } from "react-router"
 const Navbar = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 	const dropdownRef = useRef<HTMLDivElement>(null)
-	 const navigate = useNavigate()
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -25,15 +25,28 @@ const Navbar = () => {
 		setIsDropdownOpen(!isDropdownOpen)
 	}
 
-	const handleDropdownAction = (action: string) => {
-		 if (action === "Logout") {
-      localStorage.removeItem("token") 
-      navigate("/login");
-    } else {
-      console.log(`${action} clicked`);
-    }
-    setIsDropdownOpen(false);
-	}
+	const handleDropdownAction = async (action: string) => {
+		if (action === "Logout") {
+			try {
+				const response = await fetch('http://localhost:5000/api/auth/logout', {
+					method: 'POST',
+					credentials: 'include',
+				});
+				if (response.ok) {
+					// localStorage.removeItem("token");
+					navigate("/");
+				} else {
+					alert("Failed to log out");
+				}
+			} catch (error) {
+				console.error("Logout error:", error);
+				alert("An error occurred during logout");
+			}
+		} else {
+			console.log(`${action} clicked`);
+		}
+		setIsDropdownOpen(false);
+	};
 
 	return (
 		<>

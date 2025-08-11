@@ -28,10 +28,99 @@ const SignUpForm = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const submitData = {
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      email: formData.email.trim(),
+      password: formData.password,
+      role: accountType,
+      studentID: formData.studentId || undefined,
+      academicYear: formData.gradeLevel || undefined,
+      university: formData.university.trim() || undefined,
+      subjectArea: formData.subjectArea || undefined,
+      phoneNumber: formData.phone || undefined,
+      agreeToTerms: formData.agreeToTerms,
+    };
+
+    if (!submitData.firstName) {
+      alert("Please enter your first name");
+      return;
+    }
+    if (!submitData.lastName) {
+      alert("Please enter your last name");
+      return;
+    }
+    if (!submitData.email) {
+      alert("Please enter your email");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(submitData.email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+    if (!submitData.password) {
+      alert("Please enter a password");
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    if (!formData.agreeToTerms) {
+      alert("You must agree to the Terms of Service and Privacy Policy");
+      return;
+    }
+    if (accountType === "student") {
+      if (!submitData.academicYear) {
+        alert("Please select your academic year");
+        return;
+      }
+    } else if (accountType === "teacher") {
+      if (!submitData.university) {
+        alert("Please enter your university");
+        return;
+      }
+      if (!submitData.subjectArea) {
+        alert("Please select your subject area");
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(submitData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          const messages = Object.values(data.errors).map((err: any) => err.message);
+          alert(messages.join("\n"));
+        } else {
+          alert(data.message || 'Failed to sign up. Please try again.');
+        }
+        return;
+      }
+
+      alert('Account created successfully! You can now log in.');
+      window.location.href = '/login';
+
+    } catch (error) {
+      console.error('Error during sign up:', error);
+      alert('An error occurred. Please try again later.');
+    }
+  };
+
 
   return (
     <div className={styles.container}>
@@ -81,6 +170,7 @@ const SignUpForm = () => {
                 onChange={handleInputChange}
                 placeholder="Enter your first name"
                 className={styles.input}
+                required
               />
             </div>
             <div className={styles.fieldGroup}>
@@ -95,6 +185,7 @@ const SignUpForm = () => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 className={styles.input}
+                required
               />
             </div>
           </div>
@@ -112,6 +203,7 @@ const SignUpForm = () => {
               onChange={handleInputChange}
               placeholder="Enter your email"
               className={styles.input}
+              required
             />
           </div>
 
@@ -139,6 +231,7 @@ const SignUpForm = () => {
                   value={formData.gradeLevel}
                   onChange={handleInputChange}
                   className={styles.select}
+                  required
                 >
                   <option value="">Select your academic year</option>
                   <option value="college-1">First Year</option>
@@ -164,6 +257,7 @@ const SignUpForm = () => {
                   onChange={handleInputChange}
                   placeholder="e.g. PPU"
                   className={styles.input}
+                  required
                 />
               </div>
 
@@ -175,6 +269,7 @@ const SignUpForm = () => {
                   value={formData.subjectArea}
                   onChange={handleInputChange}
                   className={styles.select}
+                  required
                 >
                   <option value="">Select your subject area</option>
                   <option value="math">Mathematics</option>
@@ -215,6 +310,7 @@ const SignUpForm = () => {
                 onChange={handleInputChange}
                 placeholder="Create a strong password"
                 className={styles.passwordInput}
+                required
               />
             </div>
           </div>
@@ -233,6 +329,7 @@ const SignUpForm = () => {
                 onChange={handleInputChange}
                 placeholder="Confirm your password"
                 className={styles.passwordInput}
+                required
               />
             </div>
           </div>
@@ -246,6 +343,7 @@ const SignUpForm = () => {
               checked={formData.agreeToTerms}
               onChange={handleInputChange}
               className={styles.checkbox}
+              required
             />
             <label htmlFor="agreeToTerms" className={styles.checkboxLabel}>
               I agree to the{" "}
