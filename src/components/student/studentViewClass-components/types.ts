@@ -1,27 +1,30 @@
-export interface IClassData {
-    className: string;
-    classId: string;
-    classDetails: string;
-    onTabChange: (tabName: string) => void;
-}
 export interface IAssignmentData {
-    type: string;
-    title: string;
-    description: string;
-    dueDate: string;
-    points: number;
-    status: 'Not Submitted' | 'Submitted' | 'Graded';
-    submissionDate?: string;
-    grade?: number;
+  id: string
+  title: string
+  type: string
+  points: number
+  dueDate: string
+  status: "Submitted" | "Not Submitted" | "Graded"
+  submissionDate?: string
+  grade?: number
 }
-export interface IMaterial {
-    id: number
-    title: string
-    type: "video" | "document" | "presentation"
-    size: string
-    uploadDate: string
-    uploadedBy: string
-    downloads: number
-    category: string
-    description: string
+
+export interface IClassData {
+  className: string
+  classId: string
+  classDetails: string
+  onTabChange: (tabName: string) => void
+}
+
+export interface IMaterialData {
+  id: string
+  title: string
+  type: "video" | "presentation" | "document"
+  category: string
+  size: string
+  uploadDate: string
+  uploadedBy: string
+  downloads: number
+  description?: string
+  url?: string
 }

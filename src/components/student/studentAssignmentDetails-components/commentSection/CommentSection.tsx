@@ -1,9 +1,7 @@
-"use client"
-
 import { useState } from "react"
 import styles from "./commentSection.module.css"
 
-export default function CommentSection() {
+const CommentSection = () => {
   const [comments, setComments] = useState("")
 
   return (
@@ -18,3 +16,5 @@ export default function CommentSection() {
     </div>
   )
 }
+
+export default CommentSection;

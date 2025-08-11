@@ -1,12 +1,10 @@
-"use client"
-
 import type React from "react"
 
 import { useState, useRef } from "react"
 import { Paperclip, Upload, FileSearch, Download } from "lucide-react"
 import styles from "./uploadFile.module.css"
 
-export default function UploadFile() {
+const UploadFile = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -47,7 +45,6 @@ export default function UploadFile() {
       </div>
 
       <div className={styles.content}>
-        {/* Existing attachments */}
         <div className={styles.existingFiles}>
           <div className={styles.fileItem}>
             <div className={styles.fileInfo}>
@@ -79,7 +76,6 @@ export default function UploadFile() {
         </div>
       </div>
 
-      {/* Upload Area */}
       <div className={styles.uploadArea} onDrop={handleDrop} onDragOver={handleDragOver}>
         <Upload size={48} className={styles.uploadIcon} />
         <h3 className={styles.uploadTitle}>Upload your files</h3>
@@ -101,7 +97,6 @@ export default function UploadFile() {
 
         <p className={styles.supportedFormats}>Supported formats: PDF, DOC, DOCX, ZIP, JPG, PNG (Max 10MB each)</p>
 
-        {/* Selected Files */}
         {selectedFiles.length > 0 && (
           <div className={styles.selectedFiles}>
             <h4 className={styles.selectedTitle}>Selected Files:</h4>
@@ -125,3 +120,5 @@ export default function UploadFile() {
     </div>
   )
 }
+
+export default UploadFile;

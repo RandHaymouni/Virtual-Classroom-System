@@ -1,53 +1,85 @@
-import classes from './assignmentCard.module.css'
-import { HiExternalLink } from "react-icons/hi";
-import { LuClock } from "react-icons/lu";
-import { FiCheckCircle } from "react-icons/fi";
-import type { IAssignmentData } from '../types';
-import { CiCircleCheck } from "react-icons/ci";
-import { FiChevronRight } from "react-icons/fi";
+import classes from "./assignmentCard.module.css"
+import { HiExternalLink } from "react-icons/hi"
+import { LuClock } from "react-icons/lu"
+import { FiCheckCircle } from "react-icons/fi"
+import type { IAssignmentData } from "../types"
+import { CiCircleCheck } from "react-icons/ci"
 
 const AssignmentCard = (props: IAssignmentData) => {
-    return (
-        <div className={classes.assignmentCard}>
-            <div className={classes.titleDesc}>
-                <h3> {
-                    props.status === "Submitted" ? (
-                        <FiCheckCircle className={classes.statusSubmitted && classes.position} />
-                    ) : (props.status === "Not Submitted" ?
-                        <LuClock className={classes.statusNotSub && classes.position} /> :
-                        < CiCircleCheck className={classes.statusGraded && classes.position} />
-                    )
-                }
-                    {props.type} : {props.title}</h3>
-                <h6 className={classes.description}><FiChevronRight />Due : {props.dueDate}  , Points : {props.points}%</h6>
+  const getStatusIcon = () => {
+    switch (props.status) {
+      case "Submitted":
+        return <FiCheckCircle className={classes.statusIcon} />
+      case "Not Submitted":
+        return <LuClock className={classes.statusIcon} />
+      case "Graded":
+        return <CiCircleCheck className={classes.statusIcon} />
+      default:
+        return <LuClock className={classes.statusIcon} />
+    }
+  }
 
-                {
-                    props.status === 'Submitted' && (
-                        <h6 className={classes.submittedOn}><FiChevronRight />Submitted on {props.submissionDate} ...  Awaiting degree</h6>
-                    )}
-                {
-                    props.status === 'Graded' && (
-                        <h5 className={classes.Graded} ><FiChevronRight />Grade : {props.grade} %</h5>)}
+  const getStatusClass = () => {
+    switch (props.status) {
+      case "Submitted":
+        return classes.statusSubmitted
+      case "Not Submitted":
+        return classes.statusNotSubmitted
+      case "Graded":
+        return classes.statusGraded
+      default:
+        return classes.statusNotSubmitted
+    }
+  }
+
+  return (
+    <div className={classes.assignmentCard}>
+      <div className={classes.cardContent}>
+        <div className={classes.assignmentHeader}>
+          <div className={classes.iconAndTitle}>
+            {getStatusIcon()}
+            <div className={classes.titleSection}>
+              <h3 className={classes.assignmentTitle}>{props.title}</h3>
+              <div className={classes.assignmentMeta}>
+                <span className={classes.assignmentType}>{props.type}</span>
+                <span className={classes.separator}>•</span>
+                <span className={classes.points}>{props.points} points</span>
+                <span className={classes.separator}>•</span>
+                <span className={classes.dueDate}>Due {props.dueDate}</span>
+              </div>
             </div>
+          </div>
 
-            <div className={classes.statusDetails}>
-                <h5
-                    className={`${classes.status} ${props.status === 'Submitted'
-                        ? classes.statusSubmitted
-                        : props.status === 'Not Submitted'
-                            ? classes.statusNotSub
-                            : props.status === 'Graded'
-                                ? classes.statusGraded
-                                : ''
-                        }`}
-                >
-                    {props.status}
-                </h5>
-                <button className={classes.detailsBtn} onClick={() => { window.location.href = 'studentAssignmentDetails' }}>View Details <HiExternalLink /></button>
-            </div>
-
+          <div className={classes.cardActions}>
+            <span className={`${classes.statusBadge} ${getStatusClass()}`}>{props.status}</span>
+            <button
+              className={classes.detailsBtn}
+              onClick={() => {
+                window.location.href = "studentAssignmentDetails"
+              }}
+            >
+              View Details
+              <HiExternalLink />
+            </button>
+          </div>
         </div>
-    )
+
+        {props.status === "Submitted" && props.submissionDate && (
+          <div className={classes.submissionInfo}>
+            <span className={classes.submissionText}>Submitted on {props.submissionDate} • Awaiting grade</span>
+          </div>
+        )}
+
+        {props.status === "Graded" && props.grade && (
+          <div className={classes.gradeInfo}>
+            <span className={classes.gradeText}>
+              Grade: {props.grade}% ({Math.round((props.grade * props.points) / 100)}/{props.points})
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default AssignmentCard

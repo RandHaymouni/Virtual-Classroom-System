@@ -1,15 +1,20 @@
-import styles from "./cancelSubmit.module.css"
+import styles from "./cancelSubmit.module.css";
 interface CancelSubmitProps {
-  hasFiles: boolean
+  hasFiles: boolean;
 }
 
-export default function CancelSubmit({ hasFiles }: CancelSubmitProps) {
+
+const CancelSubmit = ({ hasFiles }: CancelSubmitProps) => {
   return (
     <div className={styles.buttonContainer}>
-      <button className={styles.cancelButton}>Cancel</button>
-      <button className={`${styles.submitButton} ${!hasFiles ? styles.disabled : ""}`} disabled={!hasFiles}>
+      <button
+        className={`${styles.submitButtonStudent} ${!hasFiles ? styles.disabledButtonStudent : ''}`}
+        disabled={!hasFiles}
+      >
         Submit Assignment
       </button>
     </div>
-  )
+  );
 }
+
+export default CancelSubmit

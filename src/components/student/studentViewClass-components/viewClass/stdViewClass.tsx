@@ -1,59 +1,54 @@
-import { useState } from 'react';
-import classes from './stdViewClass.module.css'
-import type { IClassData } from '../types';
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { FiChevronsRight } from "react-icons/fi";
+import { useState } from "react"
+import classes from "./stdViewClass.module.css"
+import type { IClassData } from "../types"
+import { IoMdArrowRoundBack } from "react-icons/io"
+
 const StdViewClass = (props: IClassData) => {
-    const [selectedTab, setSelectedTab] = useState('assignments');
-    const handleTabClick = (tabName: string) => {
-        setSelectedTab(tabName);
-        props.onTabChange(tabName); 
-    };
-    return (
-        <>
-            <button className={classes.backBtn} onClick={() => window.location.href = '/studentDashboard'}>
-                <IoMdArrowRoundBack /> <h5>Back to Dashboard</h5>
-            </button>
-            <div className={classes.classHeader}>
-                <div className={classes.classInfo}>
-                    <h1 >{props.className}
-                        <span className={classes.id}>{props.classId}</span> </h1>
-                    <p className={classes.classData}>{props.classDetails}</p>
-                </div>
-            </div>
-            <div className={classes.classContent}>
-                <div className={classes.tabs}>
-                    <button
-                        className={`${classes.assignmentsBtn} ${selectedTab === 'assignments' ? classes.selectedTab : ''}`}
-                        onClick={() => handleTabClick('assignments')}
-                    >
-                        Assignments
-                    </button>
+  const [selectedTab, setSelectedTab] = useState("assignments")
 
-                    <button
-                        className={`${classes.materialsBtn} ${selectedTab === 'materials' ? classes.selectedTab : ''}`}
-                        onClick={() => handleTabClick('materials')}
-                    >
-                        Materials
-                    </button>
+  const handleTabClick = (tabName: string) => {
+    setSelectedTab(tabName)
+    props.onTabChange(tabName)
+  }
 
-                    <button
-                        className={`${classes.myGradesBtn} ${selectedTab === 'myGrades' ? classes.selectedTab : ''}`}
-                        onClick={() => handleTabClick('myGrades')}
-                    >
-                        My Grades
-                    </button>
+  return (
+    <div className={classes.container}>
+      <button className={classes.backButton} onClick={() => (window.location.href = "/studentDashboard")}>
+        <IoMdArrowRoundBack />
+        <span>Back to Dashboard</span>
+      </button>
 
-                </div>
+      <div className={classes.classHeader}>
+        <div className={classes.classInfo}>
+          <h1 className={classes.className}>{props.className}</h1>
+          <p className={classes.classDetails}>{props.classDetails}</p>
+        </div>
+      </div>
 
-                <h2 className={classes.subHeader} ><FiChevronsRight /> All Assignments</h2>
-
-
-
-
-            </div>
-        </>
-    )
+      <div className={classes.classContent}>
+        <div className={classes.tabs}>
+          <button
+            className={`${classes.tabBtn} ${selectedTab === "assignments" ? classes.selectedTab : ""}`}
+            onClick={() => handleTabClick("assignments")}
+          >
+            Assignments
+          </button>
+          <button
+            className={`${classes.tabBtn} ${selectedTab === "materials" ? classes.selectedTab : ""}`}
+            onClick={() => handleTabClick("materials")}
+          >
+            Materials
+          </button>
+          <button
+            className={`${classes.tabBtn} ${selectedTab === "myGrades" ? classes.selectedTab : ""}`}
+            onClick={() => handleTabClick("myGrades")}
+          >
+            My Grades
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default StdViewClass

@@ -1,8 +1,6 @@
-"use client"
-
 import styles from "./assignmentHeader.module.css"
 
-export default function AssignmentHeader() {
+const AssignmentHeader = () => {
   return (
     <div className={styles.assignmentHeader}>
       <h1 className={styles.title}>
@@ -20,3 +18,5 @@ export default function AssignmentHeader() {
     </div>
   )
 }
+
+export default AssignmentHeader;

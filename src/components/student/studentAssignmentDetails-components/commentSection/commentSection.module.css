@@ -28,8 +28,8 @@
 .textarea:focus {
   outline: none;
   ring: 2px;
-  ring-color: #3b82f6;
-  border-color: #3b82f6;
+  ring-color: #3c4147;
+  border-color: #3c4147;
 }
 
 .textarea::placeholder {
