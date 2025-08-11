@@ -8,6 +8,7 @@ export interface IClass extends Document {
   enrollmentKey: string;
   teacher: mongoose.Types.ObjectId;
   students: mongoose.Types.ObjectId[];
+  color: { type: String, default: '#FFFFFF' },
   settings: {
     allowComments: boolean;
     showGrades: boolean;
@@ -39,7 +40,7 @@ const ClassSchema: Schema = new Schema({
   term: {
     type: String,
     required: [true, 'Term is required'],
-    enum: ['fall-2024', 'spring-2025', 'summer-2024', 'fall-2023', 'spring-2024']
+    enum: ['fall-2024', 'spring-2024', 'summer-2024', 'spring-2025', 'fall-2025', 'summer-2025', 'fall-2023', 'spring-2023', 'summer-2023', 'fall-2022', 'spring-2022', 'summer-2022']
   },
 
   description: {
@@ -73,6 +74,13 @@ const ClassSchema: Schema = new Schema({
       message: 'Too many students in one class'
     }
   }],
+
+  color: {
+    type: String,
+    default: 'blue',
+    trim: true,
+    enum: ['blue', 'green', 'purple', 'orange','pink','yellow','black']
+  },
 
   settings: {
     allowComments: { type: Boolean, default: false },

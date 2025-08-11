@@ -5,8 +5,10 @@ import mongoose from 'mongoose';
 import { AuthenticatedRequest, requireRole } from '../middleware/authMiddleware';
 const router = express.Router();
 
+const allowedColors = ['blue', 'green', 'purple', 'orange', 'pink', 'yellow', 'black']
 function getRandomColor() {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+  const randomIndex = Math.floor(Math.random() * allowedColors.length);
+  return allowedColors[randomIndex];
 }
 const getErrorMessage = (error: unknown): string => {
   if (error instanceof Error) {
@@ -80,7 +82,6 @@ router.get('/:id', verifyJWT, async (req: AuthenticatedRequest, res: Response) =
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
-
 
 // Update class details (only accessible by the teacher who owns the class)
 router.put('/:id', verifyJWT, requireRole(['teacher']), async (req: AuthenticatedRequest, res: Response) => {
@@ -209,6 +210,7 @@ router.post('/', verifyJWT, requireRole(['teacher']), async (req: AuthenticatedR
       }
     });
 
+    console.log("Saving class color:", newClass.color);
     const savedClass = await newClass.save();
 
     res.status(201).json({
@@ -218,6 +220,7 @@ router.post('/', verifyJWT, requireRole(['teacher']), async (req: AuthenticatedR
     });
 
   } catch (error) {
+    console.log("error", error);
     res.status(500).json({
       success: false,
       message: 'Failed to create class',
