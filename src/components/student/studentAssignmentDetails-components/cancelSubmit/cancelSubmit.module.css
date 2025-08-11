@@ -1,48 +1,43 @@
-.actions {
-    margin-top: 1%;
-    display: flex;
-    justify-content: center;
-    column-gap: 5%;
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
-.cancelBtn,
-.submitBtn {
-
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.cancelBtn {
-    background-color: #f44336;
-    margin-right: 8%;
+.cancelButton:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
 }
 
-.cancelBtn:hover,
-.submitBtn:hover {
-    cursor: pointer;
-    opacity: 0.8;
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  background-color: #111827;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.submitBtn {
-    background-color: #4CAF50;
-
+.submitButton:hover:not(.disabled) {
+  background-color: #1f2937;
 }
 
-@media screen and (max-width: 768px) {
-    .actions {
-        flex-direction: column;
-        align-items: center;
-        align-self: center;
-        margin-top: 10px;
-    }
-
-    .cancelBtn,
-    .submitBtn {
-        margin-bottom: 10px;
-    }
-
+.submitButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

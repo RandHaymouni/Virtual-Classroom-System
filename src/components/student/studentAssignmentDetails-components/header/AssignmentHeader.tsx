@@ -1,18 +1,22 @@
-import classes from './assignmentHeader.module.css';
-import type { IAssignmentHeader } from '../types.ts';
-import { RiFileEditLine } from "react-icons/ri";
-import { FiChevronRight } from "react-icons/fi";
-const AssignmentHeader = (props: IAssignmentHeader) => {
-  return (
-    <>
-      <div className={classes.assignmentHeader}>
-        <h2 className={classes.title}><RiFileEditLine /> {props.title}: {props.title}</h2>
-        <h6 className={classes.details}><FiChevronRight />{props.points}.{props.dueDate}</h6>
-        <p className={classes.description}><FiChevronRight />{props.description}</p>
-      </div>
+"use client"
 
-    </>
+import styles from "./assignmentHeader.module.css"
+
+export default function AssignmentHeader() {
+  return (
+    <div className={styles.assignmentHeader}>
+      <h1 className={styles.title}>
+        <div className={styles.icon}>
+          <div className={styles.iconInner}></div>
+        </div>
+        Final Project: Building a Web Application
+      </h1>
+      <div className={styles.metadata}>Project • 100 points • Due May 25, 2025 at 11:59 PM</div>
+      <p className={styles.description}>
+        Create a full-stack web application using the technologies we've learned throughout the semester. Your
+        application should demonstrate your understanding of front-end development, back-end integration, and database
+        management.
+      </p>
+    </div>
   )
 }
-
-export default AssignmentHeader

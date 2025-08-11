@@ -1,54 +1,127 @@
-import { Upload } from "lucide-react";
-import { FileSearch } from "lucide-react";
-import classes from './uploadFile.module.css';
-import { useUploadFile } from "./uploadFiles.hook.ts";
+"use client"
 
+import type React from "react"
 
-const UploadFile = () => {
-    const { cancelSub, fileInputRef, selectedFiles, isUploaded, handleButtonClick, handleFileChange, removeFile, handleDragOver, handleDragEnter, handleDragLeave, handleDrop } = useUploadFile();
+import { useState, useRef } from "react"
+import { Paperclip, Upload, FileSearch, Download } from "lucide-react"
+import styles from "./uploadFile.module.css"
 
-    return {
-        cancelSub,
-        isUploaded,
-        uploadFileComponent:
-            (<div className={classes.uploadFileContainer}
-                onDragOver={handleDragOver}
-                onDragEnter={handleDragEnter}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}>
-                <Upload className={classes.uploadIcon} /><h5 className={classes.uploadStatement}> Upload your files </h5>
-                <h6 >Drag and drop your files here or click to browse</h6>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    style={{ display: 'none' }}
-                    accept=".pdf,.docx,.zip,.jpg"
-                    multiple
-                />
-                <button className={classes.uploadBtn} onClick={handleButtonClick}><FileSearch /> <span>Choose Files</span></button>
-                <h6 className={classes.formats}>Supported formats: PDF, DOCX, ZIP, JPG (Max 10MB)</h6>
+export default function UploadFile() {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-                {selectedFiles != null && <div className={classes.selectedFile}>
-                    <h6>Selected Files:</h6>
-                    <ul>
-                        {selectedFiles.map((fileName, index) => (
-                            <li key={index} className={classes.fileItem}>
-                                <h3 className={classes.fileName}>{fileName}</h3>
-                                <button
-                                    onClick={() => removeFile(index)}
-                                    className={classes.removeBtn}
-                                    type="button"
-                                >
-                                    <h6 className={classes.x}>X</h6>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>}
-            </div>)
-    }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || [])
+    setSelectedFiles((prev) => [...prev, ...files])
+  }
 
+  const handleDrop = (event: React.DragEvent) => {
+    event.preventDefault()
+    const files = Array.from(event.dataTransfer.files)
+    setSelectedFiles((prev) => [...prev, ...files])
+  }
+
+  const handleDragOver = (event: React.DragEvent) => {
+    event.preventDefault()
+  }
+
+  const removeFile = (index: number) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index))
+  }
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return "0 Bytes"
+    const k = 1024
+    const sizes = ["Bytes", "KB", "MB", "GB"]
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+  }
+
+  return (
+    <div className={styles.uploadContainer}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>
+          <Paperclip size={18} />
+          Attachments
+        </h2>
+      </div>
+
+      <div className={styles.content}>
+        {/* Existing attachments */}
+        <div className={styles.existingFiles}>
+          <div className={styles.fileItem}>
+            <div className={styles.fileInfo}>
+              <div className={styles.fileIcon}></div>
+              <div>
+                <span className={styles.fileName}>project_rubric.pdf</span>
+                <span className={styles.fileSize}>(245 KB)</span>
+              </div>
+            </div>
+            <button className={styles.downloadButton}>
+              <Download size={16} />
+              Download
+            </button>
+          </div>
+
+          <div className={styles.fileItem}>
+            <div className={styles.fileInfo}>
+              <div className={styles.fileIcon}></div>
+              <div>
+                <span className={styles.fileName}>example_project.zip</span>
+                <span className={styles.fileSize}>(1.2 MB)</span>
+              </div>
+            </div>
+            <button className={styles.downloadButton}>
+              <Download size={16} />
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Upload Area */}
+      <div className={styles.uploadArea} onDrop={handleDrop} onDragOver={handleDragOver}>
+        <Upload size={48} className={styles.uploadIcon} />
+        <h3 className={styles.uploadTitle}>Upload your files</h3>
+        <p className={styles.uploadDescription}>Drag and drop files here or click to browse</p>
+
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className={styles.hiddenInput}
+          accept=".pdf,.doc,.docx,.zip,.jpg,.png"
+          multiple
+        />
+
+        <button onClick={() => fileInputRef.current?.click()} className={styles.chooseButton}>
+          <FileSearch size={16} />
+          Choose Files
+        </button>
+
+        <p className={styles.supportedFormats}>Supported formats: PDF, DOC, DOCX, ZIP, JPG, PNG (Max 10MB each)</p>
+
+        {/* Selected Files */}
+        {selectedFiles.length > 0 && (
+          <div className={styles.selectedFiles}>
+            <h4 className={styles.selectedTitle}>Selected Files:</h4>
+            <div className={styles.selectedList}>
+              {selectedFiles.map((file, index) => (
+                <div key={index} className={styles.selectedItem}>
+                  <div className={styles.selectedInfo}>
+                    <div className={styles.selectedIcon}></div>
+                    <span className={styles.selectedName}>{file.name}</span>
+                    <span className={styles.selectedSize}>({formatFileSize(file.size)})</span>
+                  </div>
+                  <button onClick={() => removeFile(index)} className={styles.removeButton}>
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
-
-export default UploadFile

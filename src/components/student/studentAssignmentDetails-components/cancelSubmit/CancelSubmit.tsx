@@ -1,15 +1,15 @@
-import classes from './cancelSubmit.module.css';
-interface ICancel {
-    isUploaded: boolean;
-    handleCancel: () => void;
-}
-const CancelSubmit = (props: ICancel) => {
-    return (
-        <div className={classes.actions}>
-            <button className={classes.cancelBtn} onClick={props.handleCancel}>Cancel</button>
-            {props.isUploaded && <button className={classes.submitBtn} onClick={() => {window.alert("Assignment Submitted") }}>Submit Assignment</button>}
-        </div>
-    )
+import styles from "./cancelSubmit.module.css"
+interface CancelSubmitProps {
+  hasFiles: boolean
 }
 
-export default CancelSubmit
+export default function CancelSubmit({ hasFiles }: CancelSubmitProps) {
+  return (
+    <div className={styles.buttonContainer}>
+      <button className={styles.cancelButton}>Cancel</button>
+      <button className={`${styles.submitButton} ${!hasFiles ? styles.disabled : ""}`} disabled={!hasFiles}>
+        Submit Assignment
+      </button>
+    </div>
+  )
+}
