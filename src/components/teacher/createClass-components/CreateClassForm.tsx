@@ -55,18 +55,11 @@ const CreateClassForm = () => {
         e.preventDefault();
 
         try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                alert('You must be logged in to create a class.');
-                return;
-            }
 
             const response = await fetch('http://localhost:5000/api/classes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',
@@ -93,7 +86,6 @@ const CreateClassForm = () => {
             alert('Error: ' + error.message);
         }
     };
-
 
     const handleCancel = () => {
         navigate("/teacherDashboard")
@@ -168,11 +160,18 @@ const CreateClassForm = () => {
                             aria-describedby="term-help"
                         >
                             <option value="">Select term</option>
+                            <option value="fall-2023">Fall 2025</option>
+                            <option value="spring-2024">Spring 2025</option>
+                            <option value="summer-2024">Summer 2025</option>
                             <option value="fall-2024">Fall 2024</option>
                             <option value="spring-2024">Spring 2024</option>
                             <option value="summer-2024">Summer 2024</option>
                             <option value="fall-2023">Fall 2023</option>
                             <option value="spring-2023">Spring 2023</option>
+                            <option value="fall-2024">Summer 2023</option>
+                            <option value="fall-2023">Fall 2022</option>
+                            <option value="spring-2024">Spring 2022</option>
+                            <option value="summer-2024">Summer 2022</option>
                         </select>
                     </div>
 
