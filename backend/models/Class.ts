@@ -79,7 +79,7 @@ const ClassSchema: Schema = new Schema({
     type: String,
     default: 'blue',
     trim: true,
-    enum: ['blue', 'green', 'purple', 'orange','pink','yellow','black']
+    enum: ['blue', 'green', 'purple', 'orange', 'pink', 'yellow', 'black']
   },
 
   settings: {
