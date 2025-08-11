@@ -1,6 +1,6 @@
 import classes from './upperHeader.module.css';
 import { ArrowLeft } from "lucide-react";
-const UpperHeader = ({ assignmentStatus }: { assignmentStatus: string }) => {
+const UpperHeader = ({ assignmentStatus }: { assignmentStatus: "Submitted" | "Not Submitted" | "Graded" }) => {
     return (
         <div className={classes.upperHeader}>
             <button className={classes.backBtn} onClick={() => window.location.href = '/StudentViewClass'}>

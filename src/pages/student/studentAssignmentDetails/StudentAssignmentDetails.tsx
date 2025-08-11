@@ -4,23 +4,71 @@ import AssignmentHeader from '../../../components/student/studentAssignmentDetai
 import classes from './StudentAssignmentDetails.module.css';
 import UploadFile from '../../../components/student/studentAssignmentDetails-components/uploadFile/UploadFile';
 import UpperHeader from '../../../components/student/studentAssignmentDetails-components/upperHeader/UpperHeader';
-const isSubmitted: boolean = false;
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+interface IAssignment {
+  title: string;
+  type: string;
+  points: number;
+  dueDate: string;
+  description: string;
+  class: string;
+  teacher: string;
+  // attachments: string[]; 
+  status: "Submitted" | "Not Submitted" | "Graded"; 
+}
 const StudentAssignmentDetails = () => {
-  const { cancelSub, isUploaded, uploadFileComponent } = UploadFile();
+  const { assignmentId } = useParams<{ assignmentId: string }>();
+  
+  if (!assignmentId) {
+    return <div>Error: Assignment ID not found</div>;
+  }
+  const [assignment, setAssignment] = useState<IAssignment>({
+    title: '',
+    type: '',
+    points: 0,
+    dueDate: '',
+    description: '',
+    class: '',
+    teacher: '',
+    status: "Not Submitted"
+  });
+
+  const { handleSubmit, cancelSub, isUploaded, uploadFileComponent } = UploadFile(assignmentId);
+
+  useEffect(() => {
+    const fetchAssignment = async () => {
+      try {
+        const res = await fetch(`http://localhost:5173/studentAssignmentDetails/${assignmentId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
+          },
+        });
+        if (!res.ok) throw new Error('Failed to fetch assignment');
+        const data = await res.json();
+        setAssignment(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchAssignment();
+  }, [assignmentId]);
   return (
     <>
-      <UpperHeader assignmentStatus={isSubmitted ? "Submitted" : "Not Submitted"} />
+      <UpperHeader assignmentStatus={assignment.status} />
       <div className={classes.container}>
-        < AssignmentHeader assignmentStatus="Graded"
-          title="React Component Development Assignment"
-          points={100}
-          dueDate="July 15, 2025"
-          description="Create a responsive React component using TypeScript and CSS modules. The component should handle user interactions and display assignment status dynamically."
+        < AssignmentHeader assignmentStatus={assignment.status}
+          title={assignment.title}
+          points={assignment.points}
+          dueDate={assignment.dueDate}
+          description={assignment.description}
         />
         {uploadFileComponent}
         <CommentSection />
-        {!isSubmitted &&
-          <CancelSubmit isUploaded={isUploaded} handleCancel={cancelSub} />
+        {assignment?.status === "Not Submitted" &&
+          <CancelSubmit isUploaded={isUploaded} handleCancel={cancelSub} handleSubmit={handleSubmit}/>
         }
       </div>
     </>

@@ -4,10 +4,11 @@ import classes from './uploadFile.module.css';
 import { useUploadFile } from "./uploadFiles.hook.ts";
 
 
-const UploadFile = () => {
-    const { cancelSub, fileInputRef, selectedFiles, isUploaded, handleButtonClick, handleFileChange, removeFile, handleDragOver, handleDragEnter, handleDragLeave, handleDrop } = useUploadFile();
+const UploadFile = (assignmentId: string) => {
+    const { handleSubmit, cancelSub, fileInputRef, selectedFiles, isUploaded, handleButtonClick, handleFileChange, removeFile, handleDragOver, handleDragEnter, handleDragLeave, handleDrop } = useUploadFile(assignmentId);
 
     return {
+        handleSubmit,
         cancelSub,
         isUploaded,
         uploadFileComponent:
@@ -32,9 +33,9 @@ const UploadFile = () => {
                 {selectedFiles != null && <div className={classes.selectedFile}>
                     <h6>Selected Files:</h6>
                     <ul>
-                        {selectedFiles.map((fileName, index) => (
+                        {selectedFiles.map((file, index) => (
                             <li key={index} className={classes.fileItem}>
-                                <h3 className={classes.fileName}>{fileName}</h3>
+                                <h3 className={classes.fileName}>{file.name}</h3>
                                 <button
                                     onClick={() => removeFile(index)}
                                     className={classes.removeBtn}

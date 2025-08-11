@@ -1,8 +1,9 @@
 import { useRef, useState, type ChangeEvent, type MouseEvent, type DragEvent, useEffect } from "react";
 
-const useUploadFile = () => {
+const useUploadFile = (assignmentId: string) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [selectedFiles, setSelectedFiles] = useState<Array<string> | null>(null);
+    // const [selectedFiles, setSelectedFiles] = useState<Array<string> | null>(null);
+    const [selectedFiles, setSelectedFiles] = useState<File[] | null>(null);
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
 
     useEffect(() => {
@@ -56,17 +57,31 @@ const useUploadFile = () => {
         }
     };
 
-    const processFiles = (files: FileList) => {
-        const filesNames = Array.from(files).map(file => file.name);
-        setSelectedFiles(prevSelection => {
+    // const processFiles = (files: FileList) => {
+    //     const filesNames = Array.from(files).map(file => file.name);
+    //     setSelectedFiles(prevSelection => {
 
+    //         if (prevSelection) {
+    //             const distinctFiles = filesNames.filter(newFile =>
+    //                 !prevSelection.includes(newFile)
+    //             );
+    //             return [...prevSelection, ...distinctFiles];
+    //         }
+    //         else return filesNames;
+    //     });
+    // };
+    const processFiles = (files: FileList) => {
+        const filesArray = Array.from(files);
+        setSelectedFiles(prevSelection => {
             if (prevSelection) {
-                const distinctFiles = filesNames.filter(newFile =>
-                    !prevSelection.includes(newFile)
+                const existingNames = prevSelection.map(f => f.name);
+                const distinctFiles = filesArray.filter(newFile =>
+                    !existingNames.includes(newFile.name)
                 );
                 return [...prevSelection, ...distinctFiles];
+            } else {
+                return filesArray;
             }
-            else return filesNames;
         });
     };
 
@@ -109,7 +124,55 @@ const useUploadFile = () => {
         }
     };
 
+    // const getToken = () => {
+    //     return localStorage.getItem('authToken') || '';
+    // };
+
+    const handleSubmit = async () => {
+        try {
+            if (!selectedFiles || selectedFiles.length === 0) {
+                throw new Error('No files selected');
+            }
+
+            const formData = new FormData();
+            selectedFiles.forEach((file) => {
+                formData.append(`files`, file);
+            });
+
+            formData.append('assignmentId', assignmentId);
+
+            const response = await fetch(`/submissions/${assignmentId}`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || `Upload failed: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Upload successful:', result);
+            alert('Upload successful');
+
+            setSelectedFiles(null);
+            setIsUploaded(false);
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
+
+            return result;
+        } catch (error) {
+            console.error('Upload error:', error);
+            throw error;
+        }
+    };
+
     return {
+        handleSubmit,
         cancelSub,
         fileInputRef,
         selectedFiles,
