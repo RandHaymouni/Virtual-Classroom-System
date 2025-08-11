@@ -10,14 +10,23 @@ import EditClassForm from "../../teacherDashboard-components/editClassForm/EditC
 
 function formatTerm(term: string): string {
   switch (term) {
-    case "fall-2024": return "Fall 2024"
+    case "fall-2025": return "Fall 2025"
     case "spring-2025": return "Spring 2025"
-    case "summer-2024": return "Summer 2024"
-    case "fall-2023": return "Fall 2023"
+    case "summer-2025": return "Summer 2025"
+    case "fall-2024": return "Fall 2024"
     case "spring-2024": return "Spring 2024"
+    case "summer-2024": return "Summer 2024"
+    case "spring-2023": return "Spring 2023"
+    case "summer-2023": return "Summer 2023"
+    case "fall-2023": return "Fall 2023"
+    case "fall-2022": return "Fall 2022"
+    case "spring-2022": return "Spring 2022"
+    case "summer-2022": return "Summer 2022"
+
     default: return term
   }
 }
+
 interface IClassViewProps {
   classId: string
 }
@@ -32,7 +41,7 @@ const tabs = [
 ]
 
 interface ClassInterface {
-  id: string
+  _id: string
   title: string
   code: string
   students: number
@@ -46,77 +55,50 @@ interface ClassInterface {
   color: string
 }
 
-const initialMockClasses: ClassInterface[] = [
-  {
-    id: "1",
-    title: "Web Development 101",
-    code: "CSC 2023",
-    students: 32,
-    term: "spring-2025",
-    activity: {
-      text: "Final Project Due",
-      due: "Tomorrow at 11:59 PM",
-      type: "project",
-    },
-    color: "green",
-  },
-  {
-    id: "2",
-    title: "Data Structures",
-    code: "CSC 3021",
-    students: 28,
-    term: "spring-2025",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus possimus consequatur, alias repellat esse culpa fugit, optio repudiandae, architecto quia voluptatum totam quo eum porro soluta consequuntur labore. Consequatur, optio.",
-    activity: {
-      text: "Quiz #3 Posted",
-      due: "Due in 5 days",
-      type: "quiz",
-    },
-    color: "blue",
-  },
-  {
-    id: "3",
-    title: "Database Systems",
-    code: "CSC 4015",
-    students: 24,
-    term: "spring-2025",
-    activity: {
-      text: "Assignment #2",
-      due: "Due in 3 days",
-      type: "assignment",
-    },
-    color: "purple",
-  },
-  {
-    id: "4",
-    title: "Software Engineering",
-    code: "CSC 4101",
-    students: 35,
-    term: "spring-2025",
-    activity: {
-      text: "Midterm Exam",
-      due: "Next Monday",
-      type: "exam",
-    },
-    color: "orange",
-  },
-]
-
 const ClassView = ({ classId }: IClassViewProps) => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabType>("assignments")
-  const [classes, setClasses] = useState<ClassInterface[]>(initialMockClasses)
   const [currentClass, setCurrentClass] = useState<ClassInterface | null>(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const foundClass = classes.find((cls) => cls.id === classId)
-    if (foundClass) {
-      setCurrentClass(foundClass)
-    } else {
-      navigate("/teacherDashboard")
+    const fetchClass = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const response = await fetch(`http://localhost:5000/api/classes/${classId}`, {
+          method: "GET",
+          credentials: "include",
+        })
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError("Class not found.")
+          } else if (response.status === 403) {
+            setError("Access denied to this class.")
+          } else {
+            setError("Failed to fetch class data.")
+          }
+          setCurrentClass(null)
+          setLoading(false)
+          return
+        }
+
+        const data = await response.json()
+        setCurrentClass(data.data)
+        setLoading(false)
+      } catch (err) {
+        console.error("Error fetching class:", err)
+        setError("Server error. Please try again later.")
+        setCurrentClass(null)
+        setLoading(false)
+      }
     }
-  }, [classId, navigate, classes])
+
+    fetchClass()
+  }, [classId])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -129,7 +111,6 @@ const ClassView = ({ classId }: IClassViewProps) => {
 
   const handleCreateAssignment = () => {
     window.scrollTo(0, 0)
-    console.log("Create Assignment clicked")
     navigate("/createAssignments")
   }
 
@@ -143,52 +124,37 @@ const ClassView = ({ classId }: IClassViewProps) => {
     updatedData: { title: string; code: string; description?: string; color: string }
   ) => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        alert('You must be logged in to update the class.');
-        return;
-      }
       const response = await fetch(`http://localhost:5000/api/classes/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(updatedData)
-      });
+      })
 
       if (response.status === 401) {
-        alert('You are not authorized. Please log in.');
-        // Optionally redirect to login page
-        navigate('/login');
-        return;
+        alert('You are not authorized. Please log in.')
+        navigate('/login')
+        return
       }
 
       if (response.status === 403) {
-        alert('You do not have permission to update this class.');
-        return;
+        alert('You do not have permission to update this class.')
+        return
       }
 
       if (!response.ok) {
-        throw new Error('Failed to update class');
+        throw new Error('Failed to update class')
       }
 
-      const data = await response.json();
-
-      const updatedClassFromServer = data.data;
-
-      setClasses((prevClasses) =>
-        prevClasses.map((cls) => (cls.id === id ? updatedClassFromServer : cls))
-      );
-      setCurrentClass((prev) => (prev && prev.id === id ? updatedClassFromServer : prev));
-      setIsEditDialogOpen(false);
+      const data = await response.json()
+      setCurrentClass(data.data)
+      setIsEditDialogOpen(false)
 
     } catch (error) {
-      console.error('Error updating class:', error);
-      alert('Failed to update class. Please try again.');
+      console.error('Error updating class:', error)
+      alert('Failed to update class. Please try again.')
     }
-  };
+  }
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -205,14 +171,25 @@ const ClassView = ({ classId }: IClassViewProps) => {
     }
   }
 
-  if (!currentClass) {
+  if (loading) {
     return (
       <div className={styles.container}>
-        <div className={styles.loadingMessage}>
-          <p>Loading class data...</p>
-        </div>
+        <p>Loading class data...</p>
       </div>
     )
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <p style={{ color: "red" }}>{error}</p>
+        <button onClick={handleBackToDashboard}>Back to Dashboard</button>
+      </div>
+    )
+  }
+
+  if (!currentClass) {
+    return null // safety fallback
   }
 
   return (
@@ -261,10 +238,14 @@ const ClassView = ({ classId }: IClassViewProps) => {
         <EditClassForm
           isOpen={isEditDialogOpen}
           onClose={() => setIsEditDialogOpen(false)}
-          classData={currentClass}
+          classData={{
+            ...currentClass,
+            id: currentClass._id,
+          }}
           onSave={handleSaveClassSettings}
         />
       )}
+
     </div>
   )
 }
