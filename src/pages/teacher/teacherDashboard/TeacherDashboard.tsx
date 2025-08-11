@@ -1,11 +1,12 @@
+import { useState } from "react"
 import ClassCard from "../../../components/teacher/teacherDashboard-components/classCard/ClassCard"
 import CreateClassCard from "../../../components/teacher/teacherDashboard-components/createNewClass/CreateNewClass"
-import { GraduationCap, BookOpen } from "lucide-react"
+import { GraduationCap, BookOpen } from 'lucide-react'
 import styles from "./teacherDashboard.module.css"
 
-const mockClasses = [
+const initialMockClasses = [
   {
-    id: 1,
+    id: "1",
     title: "Web Development 101",
     code: "CSC 2023",
     students: 32,
@@ -17,7 +18,7 @@ const mockClasses = [
     color: "green",
   },
   {
-    id: 2,
+    id: "2",
     title: "Data Structures",
     code: "CSC 3021",
     students: 28,
@@ -29,7 +30,7 @@ const mockClasses = [
     color: "blue",
   },
   {
-    id: 3,
+    id: "3",
     title: "Database Systems",
     code: "CSC 4015",
     students: 24,
@@ -41,7 +42,7 @@ const mockClasses = [
     color: "purple",
   },
   {
-    id: 4,
+    id: "4",
     title: "Software Engineering",
     code: "CSC 4101",
     students: 35,
@@ -55,6 +56,41 @@ const mockClasses = [
 ]
 
 const TeacherDashboard = () => {
+  const [classes, setClasses] = useState(initialMockClasses)
+
+  const handleDeleteClass = async (id: string) => {
+    try {
+      const token = localStorage.getItem('token') 
+
+      if (!token) {
+        alert('You are not authenticated. Please log in.')
+        return
+      }
+
+      const response = await fetch(`http://localhost:5000/api/classes/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,  
+        },
+        credentials: 'include',  
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        alert(`Failed to delete class: ${errorData.message || response.statusText}`)
+        return
+      }
+
+      setClasses(prevClasses => prevClasses.filter(cls => cls.id !== id))
+
+    } catch (error) {
+      console.error('Error deleting class:', error)
+      alert('An unexpected error occurred while deleting the class.')
+    }
+  }
+
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -67,9 +103,8 @@ const TeacherDashboard = () => {
           Manage your courses and track student progress
         </p>
       </header>
-
       <div className={styles.dashboard}>
-        {mockClasses.map((classData) => (
+        {classes.map((classData) => (
           <ClassCard
             key={classData.id}
             id={classData.id}
@@ -78,6 +113,7 @@ const TeacherDashboard = () => {
             students={classData.students}
             activity={classData.activity}
             color={classData.color}
+            onDelete={handleDeleteClass}
           />
         ))}
         <CreateClassCard />

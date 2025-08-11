@@ -19,10 +19,41 @@ const LoginForm = () => {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const loginData = {
+      email: formData.email.trim(),
+      password: formData.password,
+      rememberMe: formData.rememberMe,
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(loginData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || 'Login failed');
+        return;
+      }
+
+      if (data.user.role === "student") {
+        window.location.href = "/studentDashboard";
+      } else {
+        window.location.href = "/teacherDashboard";
+      }
+
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
 
   return (
     <div className={styles.container}>

@@ -7,8 +7,8 @@ import { useNavigate } from "react-router"
 const CreateClassForm = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        className: "",
-        classCode: "",
+        title: "",
+        code: "",
         term: "",
         description: "",
         enrollmentKey: "",
@@ -51,11 +51,49 @@ const CreateClassForm = () => {
         }))
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        console.log("Creating class with data:", formData)
-        // Handle form submission here
-    }
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                alert('You must be logged in to create a class.');
+                return;
+            }
+
+            const response = await fetch('http://localhost:5000/api/classes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include',
+            });
+
+            if (response.status === 401) {
+                alert('You are not authorized. Please log in.');
+                // Optionally redirect to login page
+                navigate('/login');
+                return;
+            }
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to create class');
+            }
+
+            const data = await response.json();
+            console.log('Class created:', data);
+            alert('Class created successfully!');
+
+            navigate('/teacherDashboard');
+        } catch (error: any) {
+            alert('Error: ' + error.message);
+        }
+    };
+
 
     const handleCancel = () => {
         navigate("/teacherDashboard")
@@ -87,9 +125,9 @@ const CreateClassForm = () => {
                             </label>
                             <input
                                 type="text"
-                                id="className"
-                                name="className"
-                                value={formData.className}
+                                id="title"
+                                name="title"
+                                value={formData.title}
                                 onChange={handleInputChange}
                                 placeholder="e.g., Web Development 101"
                                 className={styles.input}
@@ -104,9 +142,9 @@ const CreateClassForm = () => {
                             </label>
                             <input
                                 type="text"
-                                id="classCode"
-                                name="classCode"
-                                value={formData.classCode}
+                                id="code"
+                                name="code"
+                                value={formData.code}
                                 onChange={handleInputChange}
                                 placeholder="e.g., CSC 2023"
                                 className={styles.input}
@@ -262,7 +300,7 @@ const CreateClassForm = () => {
                         <button
                             type="submit"
                             className={styles.createButton}
-                            disabled={!formData.className || !formData.classCode || !formData.term || !formData.enrollmentKey}
+                            disabled={!formData.title || !formData.code || !formData.term || !formData.enrollmentKey}
                         >
                             Create Class
                         </button>
