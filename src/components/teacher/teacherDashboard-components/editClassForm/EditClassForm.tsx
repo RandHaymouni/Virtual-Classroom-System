@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react"
-import { createPortal } from "react-dom" 
+import { createPortal } from "react-dom"
 import dialogStyles from "./editClassForm.module.css"
 
 interface EditClassFormProps {
   isOpen: boolean
   onClose: () => void
   classData: {
-    id: string   
+    id: string
     title: string
     code: string
     description?: string
@@ -137,6 +137,9 @@ const EditClassForm = ({ isOpen, onClose, classData, onSave }: EditClassFormProp
               <option value="green">Green</option>
               <option value="purple">Purple</option>
               <option value="orange">Orange</option>
+              <option value="black">Black</option>
+              <option value="pink">Pink</option>
+              <option value="yellow">Yellow</option>
             </select>
           </div>
         </div>
