@@ -3,17 +3,16 @@ import CommentSection from '../../../components/student/studentAssignmentDetails
 import AssignmentHeader from '../../../components/student/studentAssignmentDetails-components/header/AssignmentHeader'
 import UploadFile from '../../../components/student/studentAssignmentDetails-components/uploadFile/UploadFile';
 import UpperHeader from '../../../components/student/studentAssignmentDetails-components/upperHeader/UpperHeader';
+import classes from './studentAssignmentDetails.module.css'
+
 const StudentAssignmentDetails = () => {
   return (
-   <div className="min-h-screen bg-gray-50">
+   <div className={classes.contener}>
       <UpperHeader />
-
-      <div className="max-w-4xl mx-auto p-6">
         <AssignmentHeader />
         <UploadFile />
         <CommentSection />
         <CancelSubmit hasFiles={false} />
-      </div>
     </div>
 
   )

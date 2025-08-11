@@ -1,143 +1,200 @@
 .assignmentCard {
-    height: 6em;
-    width: 80%;
-    background-color: rgba(236, 255, 245, 255);
-    border: 1px solid grey;
-    border-radius: 5px;
-    display: flex;
-    align-items: space-between;
-    row-gap: 0px;
-    position: relative;
-    margin-left: 1%;
-    margin-bottom: 1%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+  overflow: hidden;
 }
 
-.titleDesc {
-    display: flex;
-    flex-direction: column;
-    margin-top: 13px;
+.assignmentCard:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
 }
 
-.titleDesc,
-.statusDetails {
-    position: absolute;
-    width: 150%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    height: 90%;
+.cardContent {
+  padding: 1.5rem;
 }
 
-.description {
-    position: absolute;
-    color: grey;
-    top: 40%;
-    left: 20px;
-    font-weight: 500;
+.assignmentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
-.badgeIcon {
-    color: rgb(83, 83, 231);
+.iconAndTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
 }
 
-.statusDetails {
-    align-items: center;
+.statusIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
 }
 
-.status {
-    height: 22px;
-    width: 100px;
-    margin-right: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.059);
-    border-radius: 30px;
-    background-color: antiquewhite;
-    text-align: center;
-    align-content: center;
-    font-weight: bold;
-    margin-top: 15px;
+.titleSection {
+  flex: 1;
+  min-width: 0;
+}
+
+.assignmentTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.assignmentMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  flex-wrap: wrap;
+}
+
+.assignmentType {
+  font-weight: 500;
+}
+
+.separator {
+  color: #cbd5e1;
+}
+
+.points,
+.dueDate {
+  white-space: nowrap;
+}
+
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .statusSubmitted {
-    color: rgb(83, 83, 231);
-    background-color: rgba(65, 105, 225, 0.1);
+  background: #dbeafe;
+  color: #1d4ed8;
 }
 
-.submittedOn {
-    color: rgb(83, 83, 231);
-    margin-top: 28px;
-    margin-left: 18px;
-}
-
-.Graded {
-    color: rgb(21, 153, 21);
-    margin-top: 25px;
-    margin-left: 18px;
-}
-
-.statusNotSub {
-    color: rgb(133, 53, 53);
+.statusNotSubmitted {
+  background: #fef3c7;
+  color: #d97706;
 }
 
 .statusGraded {
-    color: rgb(21, 153, 21);
-    background-color: rgba(127, 255, 212, 0.295);
-}
-
-.position {
-    margin-right: 5px;
+  background: #dcfce7;
+  color: #16a34a;
 }
 
 .detailsBtn {
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    color: grey;
-    margin-top: 3%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  transition: color 0.2s;
 }
 
 .detailsBtn:hover {
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
+  color: #1e293b;
 }
 
-@media screen and (max-width: 768px) {
-    .assignmentCard {
-        width: 90%;
-        height: 100px;
-        align-items: center;
-    }
+.submissionInfo,
+.gradeInfo {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
 
-    .titleDesc {
-        width: 100%;
-        margin-left: 10px;
-        font-size: medium;
-    }
+.submissionText {
+  font-size: 0.875rem;
+  color: #1d4ed8;
+  font-weight: 500;
+}
 
-    .statusDetails {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-    }
+.gradeText {
+  font-size: 0.875rem;
+  color: #16a34a;
+  font-weight: 600;
+}
 
-    .description {
-        font-size: 14px;
-        font-size: x-small;
-    }
+/* Status icon colors */
+.statusIcon {
+  color: #64748b;
+}
 
-    .detailsBtn {
-        bottom: 9%
-    }
+.iconAndTitle .statusSubmitted {
+  color: #1d4ed8;
+}
 
-    .status {
-        height: 20px;
-        width: 90px;
-        font-size: x-small;
-    }
+.iconAndTitle .statusNotSubmitted {
+  color: #d97706;
+}
 
-    .submittedOn {
-        margin-top: 6%;
-    }
+.iconAndTitle .statusGraded {
+  color: #16a34a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .assignmentHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cardActions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .assignmentMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .separator {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .assignmentTitle {
+    font-size: 0.875rem;
+  }
+
+  .assignmentMeta {
+    font-size: 0.75rem;
+  }
+
+  .detailsBtn {
+    font-size: 0.75rem;
+  }
 }
