@@ -37,6 +37,22 @@
   background: #fed7aa;
 }
 
+.pink .header {
+  background: #ddc9eb;
+}
+
+.yellow .header {
+  background: #f4f2af;
+}
+
+.black .header {
+  background: #a8a8ab;
+}
+
+.orange .header {
+  background: #fed7aa;
+}
+
 .title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -47,15 +63,15 @@
 
 .code {
   font-size: 0.875rem;
-  color: #6b7280;
-  margin: 0;
+  color: #6c7176;
+  margin-top: 7px;
   font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
   width: fit-content;
-  border: 1px solid #acacb1;
+  border: 1px solid #434345;
   border-radius: 8px;
   padding: 0.15rem 0.75rem;
 }
@@ -140,6 +156,18 @@
   color: #f59e0b;
 }
 
+.pink .activityIcon {
+  color: #936599;
+}
+
+.yellow .activityIcon {
+  color: #ded754;
+}
+
+.black .activityIcon {
+  color: #1d1d1e;
+}
+
 .activityDetails {
   display: flex;
   flex-direction: column;
@@ -182,6 +210,29 @@
 
 .blue .viewLink:hover {
   color: #2563eb;
+}
+
+.black .viewLink {
+  color: #343536;
+}
+
+.black .viewLink:hover {
+  color: #1d1d1e;
+}
+
+.pink .viewLink {
+  color: #f2a6f6;
+}
+
+.pink .viewLink:hover {
+  color: #936599;
+}
+.yellow .viewLink {
+  color: #e3e977;
+}
+
+.yellow .viewLink:hover {
+  color: #ded754;
 }
 
 .green .viewLink {
@@ -277,4 +328,4 @@
 
 .dropdownItem:hover {
   background-color: #f3f4f6;
-}
+} 
