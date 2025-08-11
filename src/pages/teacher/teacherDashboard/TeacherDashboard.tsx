@@ -1,79 +1,47 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ClassCard from "../../../components/teacher/teacherDashboard-components/classCard/ClassCard"
 import CreateClassCard from "../../../components/teacher/teacherDashboard-components/createNewClass/CreateNewClass"
 import { GraduationCap, BookOpen } from 'lucide-react'
 import styles from "./teacherDashboard.module.css"
 
-const initialMockClasses = [
-  {
-    id: "1",
-    title: "Web Development 101",
-    code: "CSC 2023",
-    students: 32,
-    activity: {
-      text: "Final Project Due",
-      due: "Tomorrow at 11:59 PM",
-      type: "project",
-    },
-    color: "green",
-  },
-  {
-    id: "2",
-    title: "Data Structures",
-    code: "CSC 3021",
-    students: 28,
-    activity: {
-      text: "Quiz #3 Posted",
-      due: "Due in 5 days",
-      type: "quiz",
-    },
-    color: "blue",
-  },
-  {
-    id: "3",
-    title: "Database Systems",
-    code: "CSC 4015",
-    students: 24,
-    activity: {
-      text: "Assignment #2",
-      due: "Due in 3 days",
-      type: "assignment",
-    },
-    color: "purple",
-  },
-  {
-    id: "4",
-    title: "Software Engineering",
-    code: "CSC 4101",
-    students: 35,
-    activity: {
-      text: "Midterm Exam",
-      due: "Next Monday",
-      type: "exam",
-    },
-    color: "orange",
-  },
-]
-
 const TeacherDashboard = () => {
-  const [classes, setClasses] = useState(initialMockClasses)
+  const [classes, setClasses] = useState<any[]>([])
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/classes", {
+          method: "GET",
+          credentials: "include",
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          alert(`Failed to fetch classes: ${errorData.message || response.statusText}`)
+          return
+        }
+
+        const data = await response.json()
+        console.log("Data:", data);
+
+        setClasses(data.data || [])
+      } catch (error) {
+        console.error("Error fetching classes:", error)
+        alert("An unexpected error occurred while fetching the classes.")
+      }
+    }
+
+    fetchClasses()
+  }, [])
 
   const handleDeleteClass = async (id: string) => {
     try {
-      const token = localStorage.getItem('token') 
-
-      if (!token) {
-        alert('You are not authenticated. Please log in.')
-        return
-      }
-
       const response = await fetch(`http://localhost:5000/api/classes/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,  
         },
-        credentials: 'include',  
+        credentials: 'include', // مهم عشان الكوكي يروح
       })
 
       if (!response.ok) {
@@ -82,14 +50,12 @@ const TeacherDashboard = () => {
         return
       }
 
-      setClasses(prevClasses => prevClasses.filter(cls => cls.id !== id))
-
+      setClasses(prevClasses => prevClasses.filter(cls => cls._id !== id))
     } catch (error) {
       console.error('Error deleting class:', error)
       alert('An unexpected error occurred while deleting the class.')
     }
   }
-
 
   return (
     <div className={styles.container}>
@@ -106,12 +72,12 @@ const TeacherDashboard = () => {
       <div className={styles.dashboard}>
         {classes.map((classData) => (
           <ClassCard
-            key={classData.id}
-            id={classData.id}
+            key={classData._id}
+            id={classData._id}
             title={classData.title}
             code={classData.code}
-            students={classData.students}
-            activity={classData.activity}
+            students={classData.students?.length || 0}
+            activity={classData.activity || { type: "default", text: "No recent activity", due: "" }}
             color={classData.color}
             onDelete={handleDeleteClass}
           />
