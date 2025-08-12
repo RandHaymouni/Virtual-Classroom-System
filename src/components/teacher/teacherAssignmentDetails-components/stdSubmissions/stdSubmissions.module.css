@@ -1,181 +1,176 @@
-.StdSubContainer {
-    margin: 2% 2%;
-    width: 95%;
+.submissionsContainer {
+  width: 100%;
+  margin-top: 2%;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
+.submissionsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1%;
 }
 
-.actions {
-    display: flex;
-    gap: 15px;
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
 }
 
-.search {
-    border: 1px solid black;
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background-color: white;
-    font-weight: 500;
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-.filterContainer {
-    margin-right: 0px;
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
 }
 
-.filter {
-    box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.043);
-    border-radius: 10px;
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filterButton:hover {
+  background-color: #f5f5f5;
 }
 
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-tr {
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.tableHeader {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.statusSubmitted,
-.statusNotSub,
-.statusGraded {
-    padding: 1px 2px;
-    align-self: center;
-    border-radius: 8px;
-    font-size: small;
-    font-weight: bold;
-}
-
-.statusSubmitted {
-    color: rgb(83, 83, 231);
-    background-color: rgba(65, 105, 225, 0.1);
-}
-
-.statusNotSub {
-    color: rgb(133, 53, 53);
-    background-color: rgba(133, 53, 53, 0.1);
+.tableHeaderCell {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
 }
 
 .tableRow {
-    height: 40px;
-
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.statusGraded {
-    color: rgb(21, 153, 21);
-    background-color: rgba(127, 255, 212, 0.1);
+.tableRow:hover {
+  background-color: #f8f9fa;
 }
 
-.viewGradeActions {
-    display: flex;
-    gap: 20px;
-
+.tableCell {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
 }
 
-.viewGradeActions button {
-    width: 75px;
-    padding: 2px 3px;
-    border-radius: 5px;
+.studentName {
+  font-weight: 500;
+}
+
+.submissionDate {
+  color: #666;
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statusSubmitted {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.statusNotSubmitted {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.viewButton {
+  background-color: transparent;
+  color: #1976d2;
+  border: 1px solid #1976d2;
+}
+
+.viewButton:hover {
+  background-color: #e3f2fd;
+}
+
+.gradeButton {
+  background-color: #333;
+  color: white;
+}
+
+.gradeButton:hover {
+  background-color: #555;
+}
+
+@media screen and (max-width: 768px) {
+  .submissionsHeader {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .controls {
+    justify-content: space-between;
+  }
+
+  .searchInput {
+    width: 150px;
+  }
+
+  .table {
     font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-}
+  }
 
-.viewBtn {
-    background-color: white;
-}
+  .tableHeaderCell,
+  .tableCell {
+    padding: 8px 12px;
+  }
 
-.gradeBtn {
-    background-color: black;
-    color: white;
-}
+  .actionButtons {
+    flex-direction: column;
+    gap: 4px;
+  }
 
-.notFound {
-    color: rgb(133, 53, 53);
-}
-
-.filter {
-    height: 30px;
-}
-
-
-@media (max-width: 768px) {
-    .StdSubContainer {
-        margin: 1rem;
-        width: 90%;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
-    .title {
-        font-size: 1.25rem;
-        text-align: center;
-    }
-    .actions {
-        justify-content: space-between;
-        flex-direction: column;
-        align-items: center;
-        align-self: center;
-    }
-    .search {
-        min-width: auto;
-        width: 100%;
-    }
-
-    .filter {
-        width: 100%;
-        height: 20px;
-    }
-    .tableRow {
-        height: 55px;
-    }
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-        justify-content: space-between;
-    }
-    tbody>tr>td {
-        padding: 10px;
-        text-align: center;
-    }
-    th {
-        font-size: smaller;
-        width: 10%;
-        text-align: center;
-    }
-    td {
-        font-size: smaller;
-        align-items: stretch;
-    }
-    thead {
-        width: 100%;
-        justify-content: space-between;
-    }
-    tr {
-        justify-content: space-between;
-        border-bottom: 1px solid #ddd;
-    }
-    .viewGradeActions {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 3px;
-    }
-    .viewGradeActions button {
-        width: 55px;
-        font-size: 11px;
-
-    }
-
+  .actionButton {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
 }

@@ -53,7 +53,7 @@ const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
 
       if (!isRoleAllowed) {
         alert('🚫 You are not authorized to access this page.');
-        navigate(-1); // Go back
+        navigate("/unathrizedPage");
       }
     }
   }, [authState, allowedRoles, navigate]);

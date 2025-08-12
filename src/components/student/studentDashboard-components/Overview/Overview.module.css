@@ -135,3 +135,9 @@
   cursor: pointer;
   border-top: 1px solid #f3f4f6;
 }
+
+.viewAllButton:hover {
+  background-color: #e0f2fe; 
+  color: #1e40af; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

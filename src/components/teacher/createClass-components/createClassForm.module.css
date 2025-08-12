@@ -37,7 +37,7 @@
 
 .header {
   margin-bottom: 2rem;
-  margin-top: 3rem; 
+  margin-top: 3rem;
 }
 
 .title {
@@ -379,6 +379,7 @@
 }
 
 @media (prefers-contrast: high) {
+
   .input,
   .select,
   .textarea {

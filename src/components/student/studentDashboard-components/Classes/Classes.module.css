@@ -103,3 +103,9 @@
   cursor: pointer;
   margin-left: auto;
 }
+
+.joinClassButton:hover {
+  background-color: #374151; 
+  color: #f9fafb; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -47,11 +47,6 @@ const ViewAssignmentsDetails = () => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <div className={styles.breadcrumbs}>
-                    <a href="/teacherViewClass" className={styles.breadcrumb}>
-                        <ArrowLeft />
-                        Back to Assignments
-                        <span className={`${styles.statusBadge} ${styles.active}`}>Active</span>
-                    </a>
                     <a href="/teacherAssignmentDetails" className={styles.breadcrumb}>
                         <ArrowLeft />
                         Back to Submissions
