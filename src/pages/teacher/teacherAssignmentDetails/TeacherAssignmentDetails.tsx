@@ -50,7 +50,7 @@ const studentData = [
 
 // Calculate days remaining
 const calculateDaysRemaining = (dueDate: string): number => {
-    const due = new Date("2025-05-25T23:59:00")
+    const due = new Date("2025-10-25T23:59:00")
     const today = new Date()
     const timeDiff = due.getTime() - today.getTime()
     return Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
