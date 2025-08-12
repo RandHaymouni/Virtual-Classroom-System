@@ -83,7 +83,6 @@ export default function Page() {
         <div>
             <StdViewClass
                 className="Web Development 101"
-                classId="CSC 2023 • Spring 2025 • Dr. John Smith"
                 classDetails="CSC 2023 • Spring 2025 • Dr. John Smith"
                 onTabChange={handleTabChange}
             />
