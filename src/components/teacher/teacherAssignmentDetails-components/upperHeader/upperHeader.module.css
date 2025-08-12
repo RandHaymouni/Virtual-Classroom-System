@@ -1,78 +1,41 @@
-.upperHeader {
-    width: 83%;
-    height: 15%;
-    display: flex;
-    margin: 1% 0 0 1%;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 0;
-    overflow: hidden;
-    margin-bottom: 1%;
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-.backBtn {
-    display: flex;
-    font-weight: 10;
-    border-width: 0;
-    background: transparent;
-    margin-bottom: 2%;
-    margin-left: 1%;
-    width: 180px;
-    margin-top: 18px;
-    color: grey;
+.backButton:hover {
+  color: #374151;
+  background-color: #f3f4f6;
 }
 
-.backBtn:hover {
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    background-color: transparent;
-}
-
-.status {
-    height: 20px;
-    width: 100px;
-    margin-right: 3.5%;
-    border: 1px solid rgba(0, 0, 0, 0.059);
-    border-radius: 40%;
-    background-color: rgba(250, 235, 215, 0.364);
-    text-align: center;
-    align-content: center;
-    font-weight: bolder;
-}
-
-.notActive {
-    color: rgb(133, 53, 53);
-}
-
-.active {
-    color: rgb(21, 153, 21);
-    background-color: rgba(127, 255, 212, 0.295);
+.statusBadge {
+  background-color: #0066cc;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 768px) {
-    .upperHeader {
-        width: 95%;
-        height: auto;
-        align-items: center;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        align-self: center;
-    }
-
-    .backBtn {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .status {
-        width: 20%;
-        margin-right: 0;
-    }
-
+  .upperHeaderContainer {
+    padding: 0 4%;
+  }
+  .backButton {
+    font-size: 14px;
+  }
+  .statusBadge {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
 }

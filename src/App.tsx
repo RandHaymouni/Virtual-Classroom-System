@@ -15,6 +15,7 @@ import MainLayout from './layouts/MainLayout'
 import ViewAssignmentsDetails from './components/teacher/createAssignments-components/viewAssignments/viewAssignmentsDetails/ViewAssignmentsDetails'
 import LandingPage from './pages/landingPage/LandingPage'
 import ProtectedRoute from './protectedRouter/ProtectedRouter'
+import UnauthorizedPage from './pages/unauthorizedPage/UnauthorizedPage'
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signUp' element={<SignUp />} />
+        < Route path='/unathrizedPage' element={
+          <UnauthorizedPage />
+        } />
         <Route path='/studentDashboard' element={
           <ProtectedRoute allowedRoles={['student']}>
             <MainLayout><StudentDashboard /></MainLayout>

@@ -1,21 +1,49 @@
-import classes from './submitSummary.module.css'
-import type {ISummary } from '../types';
-import useSubmitSummary from './useSubmitSummary.hook';
-const { calcDays, percentage } = useSubmitSummary();
-const SubmitSummary = (props: ISummary) => {
-  return (
-    <div className={classes.submitSummaryContainer}>
-      <h5 className={classes.summaryTitle}>{props.title}</h5>
-      {props.total &&
-        <h1 className={classes.summaryNumber}>{props.count}/{props.total}</h1>}
-      {props.total &&
-        <h6 className={classes.summaryDetails}>{percentage(props.count, props.total)}% Complete </h6>}
-      {props.dueDate ?
-        <h1 className={classes.dueDate}>{calcDays(props.dueDate)} </h1> :
-        null}
-      {props.dueDate ?
-        <h6 className={classes.dueDateDesc}> until due date </h6> : null}
-    </div>
-  )
+import styles from "./submitSummary.module.css"
+
+interface SubmitSummaryProps {
+    submittedCount: number
+    totalStudents: number
+    gradedCount: number
+    daysRemaining: number
 }
+
+const SubmitSummary = ({
+    submittedCount,
+    totalStudents,
+    gradedCount,
+    daysRemaining,
+}: SubmitSummaryProps) => {
+    return (
+        <div className={styles.myGrid}>
+            <div className={styles.submitSummaryContainer}>
+                <h3 className={styles.summaryTitle}>Submissions</h3>
+                <div className={styles.summaryNumber}>
+                    {submittedCount}/{totalStudents}
+                </div>
+                <p className={styles.summaryDetails}>
+                    {Math.round((submittedCount / totalStudents) * 100)}% Complete
+                </p>
+            </div>
+
+            <div className={styles.submitSummaryContainer}>
+                <h3 className={styles.summaryTitle}>Graded</h3>
+                <div className={styles.summaryNumber}>
+                    {gradedCount}/{submittedCount}
+                </div>
+                <p className={styles.summaryDetails}>
+                    {submittedCount > 0
+                        ? Math.round((gradedCount / submittedCount) * 100)
+                        : 0}% Complete
+                </p>
+            </div>
+
+            <div className={styles.submitSummaryContainer}>
+                <h3 className={styles.dueDateDesc}>Time Remaining</h3>
+                <div className={styles.dueDate}>{daysRemaining} days</div>
+                <p className={styles.dueDateDesc}>Until due date</p>
+            </div>
+        </div>
+    )
+}
+
 export default SubmitSummary

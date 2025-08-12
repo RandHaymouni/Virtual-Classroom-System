@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth';
 import studentRouter from './routes/student';
 import assignmentsRouter from './routes/assignments';
+import SubmissionRouter from './routes/submissions';
 
 dotenv.config();
 connectDB();
@@ -15,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5175'],
+  origin: ['http://localhost:3000', 'http://localhost:5173'],
   credentials: true
 }));
 app.use(express.json());
@@ -25,6 +26,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/classes', classesRouter);
 app.use('/api/student', studentRouter);
 app.use('/api/assignments', assignmentsRouter);
+app.use('/api/submission', SubmissionRouter)
+
 app.get('/health', (req, res) => res.send('Server is running'));
 
 app.get('/api/test', (req, res) => {
