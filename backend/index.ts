@@ -5,6 +5,8 @@ import connectDB from './config/db';
 import classesRouter from './routes/classes';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth';
+import studentRouter from './routes/student';
+import assignmentsRouter from './routes/assignments';
 
 dotenv.config();
 connectDB();
@@ -21,7 +23,8 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/classes', classesRouter);
-
+app.use('/api/student', studentRouter);
+app.use('/api/assignments', assignmentsRouter);
 app.get('/health', (req, res) => res.send('Server is running'));
 
 app.get('/api/test', (req, res) => {

@@ -11,7 +11,6 @@ export interface IAssignmentData {
 
 export interface IClassData {
   className: string
-  classId: string
   classDetails: string
   onTabChange: (tabName: string) => void
 }

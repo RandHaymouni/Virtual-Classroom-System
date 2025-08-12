@@ -18,7 +18,7 @@ import ProtectedRoute from './protectedRouter/ProtectedRouter'
 
 
 function App() {
-  
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,7 +40,7 @@ function App() {
             <MainLayout><StudentAssignmentDetails /></MainLayout>
           </ProtectedRoute>
         } />
-        < Route path='/StudentViewClass' element={
+        < Route path='/StudentViewClass/:id' element={
           < ProtectedRoute allowedRoles={['student']}>
             <MainLayout><StudentViewClass /></MainLayout>
           </ProtectedRoute>
@@ -50,7 +50,7 @@ function App() {
             <MainLayout><TeacherDashboard /></MainLayout>
           </ProtectedRoute>
         } />
-        < Route path='/createAssignments' element={
+        < Route path='/createAssignments/:id' element={
           < ProtectedRoute allowedRoles={['teacher']}>
             <MainLayout><CreateAssignments /></MainLayout>
           </ProtectedRoute>
