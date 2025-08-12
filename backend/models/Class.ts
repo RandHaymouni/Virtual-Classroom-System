@@ -64,17 +64,15 @@ const ClassSchema: Schema = new Schema({
     required: [true, 'Teacher is required']
   },
 
-  students: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  students: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     validate: {
       validator: function (v: Types.ObjectId[]) {
         return v.length <= 200;
       },
       message: 'Too many students in one class'
     }
-  }],
-
+  },
   color: {
     type: String,
     default: 'blue',

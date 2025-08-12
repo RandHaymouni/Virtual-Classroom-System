@@ -44,7 +44,7 @@ interface ClassInterface {
   _id: string
   title: string
   code: string
-  students: number
+  students: []
   description?: string,
   term: string
   activity: {
@@ -111,7 +111,7 @@ const ClassView = ({ classId }: IClassViewProps) => {
 
   const handleCreateAssignment = () => {
     window.scrollTo(0, 0)
-    navigate("/createAssignments")
+   navigate(`/createAssignments/${classId}`);
   }
 
   const handleClassSettings = () => {
@@ -189,7 +189,7 @@ const ClassView = ({ classId }: IClassViewProps) => {
   }
 
   if (!currentClass) {
-    return null // safety fallback
+    return null 
   }
 
   return (
@@ -214,7 +214,7 @@ const ClassView = ({ classId }: IClassViewProps) => {
         <div className={styles.headerContent}>
           <h1 className={styles.title}>{currentClass.title}</h1>
           <p className={styles.metadata}>
-            {`${currentClass.code} · ${formatTerm(currentClass.term)} · ${currentClass.students} students`}
+            {`${currentClass.code} · ${formatTerm(currentClass.term)} · ${currentClass.students.length} students`}
           </p>
           {currentClass.description && (
             <p className={styles.description}>{currentClass.description}</p>

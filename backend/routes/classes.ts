@@ -3,6 +3,8 @@ import Class from '../models/Class';
 import { verifyJWT } from '../middleware/authMiddleware';
 import mongoose from 'mongoose';
 import { AuthenticatedRequest, requireRole } from '../middleware/authMiddleware';
+import AssignmentModel from '../models/Assignment';
+
 const router = express.Router();
 
 const allowedColors = ['blue', 'green', 'purple', 'orange', 'pink', 'yellow', 'black']
@@ -229,228 +231,124 @@ router.post('/', verifyJWT, requireRole(['teacher']), async (req: AuthenticatedR
   }
 });
 
+// Join class (any logged-in user)
+router.post('/join', verifyJWT, async (req: AuthenticatedRequest, res: Response) => {
+  console.log('POST /join called with body:', req.body);
+  try {
+    const { enrollmentKey, action } = req.body;
+    if (!enrollmentKey) {
+      return res.status(400).json({
+        success: false,
+        message: 'Enrollment key is required'
+      });
+    }
+
+    const classData = await Class.findOne({ enrollmentKey: enrollmentKey.toUpperCase() });
+    if (!classData) {
+      return res.status(404).json({
+        success: false,
+        message: 'Invalid enrollment key'
+      });
+    }
+    console.log('Action:', req.body.action);
+
+    if (action === 'find') {
+      return res.json({
+        success: true,
+        message: 'Class found successfully',
+        data: {
+          id: classData._id,
+          title: classData.title,
+          code: classData.code,
+          description: classData.description,
+          color: classData.color
+        }
+      });
+    }
+
+    if (action !== 'join') {
+      console.log('Action is not join:', action);
+    }
+
+    if (action === 'join') {
+      const studentId = req.user?.id;
+      if (!studentId) {
+        return res.status(401).json({ success: false, message: 'Unauthorized' });
+      }
+
+      const studentObjectId = new mongoose.Types.ObjectId(studentId);
+      console.log('Students before check:', classData.students);
+      console.log('Student to add:', studentObjectId);
+      if (!classData.students.some(s => s.equals(studentObjectId))) {
+        console.log('Student not found in class, adding...');
+        classData.students.push(studentObjectId);
+        await classData.save();
+        console.log('After saving students:', classData.students);
+      }
+      else {
+        console.log('Student already in class');
+      }
+
+      return res.json({
+        success: true,
+        message: 'Joined class successfully',
+        data: classData
+      });
+    }
+
+    res.status(400).json({ success: false, message: 'Invalid action' });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to join class',
+      error: getErrorMessage(error)
+    });
+  }
+});
+
+router.get(
+  '/:id/assignments',
+  verifyJWT,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const classId = req.params.id;
+      const userId = req.user?.id;
+
+      // تحقق صلاحية ID
+      if (!classId || !classId.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({ success: false, message: 'Invalid class ID' });
+      }
+
+      // جلب بيانات الكلاس للتحقق من العضوية
+      const classData = await Class.findById(classId);
+
+      if (!classData) {
+        return res.status(404).json({ success: false, message: 'Class not found' });
+      }
+
+      // تحقق إذا المستخدم معلم أو طالب ضمن الكلاس
+      const isTeacher = classData.teacher.toString() === userId;
+      const isStudent = classData.students.some((studentId: any) => studentId.toString() === userId);
+
+      if (!isTeacher && !isStudent) {
+        return res.status(403).json({ success: false, message: 'Access denied: Not a member of this class' });
+      }
+
+      // جلب الواجبات الخاصة بالكلاس مع الحقول المطلوبة فقط
+      const assignments = await AssignmentModel.find({ class: classId })
+        .select('title assignmentType points dueDate instructions settings')
+        .sort({ dueDate: 1 });
+
+      res.json({
+        success: true,
+        data: assignments,
+      });
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+      res.status(500).json({ success: false, message: 'Server error' });
+    }
+  }
+);
 
 
 export default router;
-
-
-
-
-// import express, { Request, Response } from 'express';
-// import Class from '../models/Class';
-// import { Types } from 'mongoose';
-// import { verifyJWT, requireRole } from '../middleware/authMiddleware';
-
-// const router = express.Router();
-
-// const getErrorMessage = (error: unknown): string => {
-//   if (error instanceof Error) {
-//     return error.message;
-//   }
-//   return String(error);
-// };
-
-// // Get all classes (any logged-in user)
-// router.get('/', verifyJWT, async (req: Request, res: Response) => {
-//   try {
-//     const classes = await Class.find()
-//       .populate('teacher', 'name email')
-//       .populate('students', 'name email')
-//       .sort({ createdAt: -1 });
-//     res.json({
-//       success: true,
-//       message: 'Classes retrieved successfully',
-//       count: classes.length,
-//       data: classes
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to retrieve classes',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// // Get single class
-// router.get('/:id', verifyJWT, async (req: Request, res: Response) => {
-//   try {
-//     const classData = await Class.findById(req.params.id)
-//       .populate('teacher', 'name email')
-//       .populate('students', 'name email');
-//     if (!classData) {
-//       return res.status(404).json({
-//         success: false,
-//         message: 'Class not found'
-//       });
-//     }
-//     res.json({
-//       success: true,
-//       message: 'Class retrieved successfully',
-//       data: classData
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to retrieve class',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// // Create class (teachers only)
-// router.post('/', verifyJWT, requireRole(['teacher']), async (req: Request, res: Response) => {
-//   try {
-//     const { title, code, term, description, enrollmentKey, settings } = req.body;
-//     if (!title || !code || !term || !enrollmentKey) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Missing required fields: title, code, term, enrollmentKey'
-//       });
-//     }
-
-//     const existingClass = await Class.findOne({ code: code.toUpperCase() });
-//     if (existingClass) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Class code already exists'
-//       });
-//     }
-
-//     const existingKey = await Class.findOne({ enrollmentKey: enrollmentKey.toUpperCase() });
-//     if (existingKey) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Enrollment key already exists'
-//       });
-//     }
-
-//     const newClass = new Class({
-//       title,
-//       code: code.toUpperCase(),
-//       term,
-//       description,
-//       enrollmentKey: enrollmentKey.toUpperCase(),
-//       teacher: new Types.ObjectId(req.user?.id),
-//       settings: {
-//         allowComments: settings?.allowComments || false,
-//         showGrades: settings?.showGrades !== false,
-//         allowLateSubmissions: settings?.allowLateSubmissions || false,
-//         sendNotifications: settings?.sendNotifications !== false
-//       }
-//     });
-
-//     const savedClass = await newClass.save();
-//     res.status(201).json({
-//       success: true,
-//       message: 'Class created successfully',
-//       data: savedClass
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to create class',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// // Update class (teachers only)
-// router.put('/:id', verifyJWT, requireRole(['teacher']), async (req: Request, res: Response) => {
-//   try {
-//     const { title, description, settings } = req.body;
-//     const updatedClass = await Class.findByIdAndUpdate(
-//       req.params.id,
-//       {
-//         ...(title && { title }),
-//         ...(description !== undefined && { description }),
-//         ...(settings && { settings: { ...settings } })
-//       },
-//       { new: true, runValidators: true }
-//     ).populate('teacher', 'name email').populate('students', 'name email');
-
-//     if (!updatedClass) {
-//       return res.status(404).json({
-//         success: false,
-//         message: 'Class not found'
-//       });
-//     }
-
-//     res.json({
-//       success: true,
-//       message: 'Class updated successfully',
-//       data: updatedClass
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to update class',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// // Delete class (teachers only)
-// router.delete('/:id', verifyJWT, requireRole(['teacher']), async (req: Request, res: Response) => {
-//   try {
-//     const deletedClass = await Class.findByIdAndDelete(req.params.id);
-//     if (!deletedClass) {
-//       return res.status(404).json({
-//         success: false,
-//         message: 'Class not found'
-//       });
-//     }
-
-//     res.json({
-//       success: true,
-//       message: 'Class deleted successfully',
-//       data: { id: req.params.id, title: deletedClass.title }
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to delete class',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// // Join class (any logged-in user)
-// router.post('/join', verifyJWT, async (req: Request, res: Response) => {
-//   try {
-//     const { enrollmentKey } = req.body;
-//     if (!enrollmentKey) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'Enrollment key is required'
-//       });
-//     }
-
-//     const classData = await Class.findOne({ enrollmentKey: enrollmentKey.toUpperCase() });
-//     if (!classData) {
-//       return res.status(404).json({
-//         success: false,
-//         message: 'Invalid enrollment key'
-//       });
-//     }
-
-//     res.json({
-//       success: true,
-//       message: 'Class found successfully',
-//       data: {
-//         id: classData._id,
-//         title: classData.title,
-//         code: classData.code,
-//         description: classData.description
-//       }
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to join class',
-//       error: getErrorMessage(error)
-//     });
-//   }
-// });
-
-// export default router;

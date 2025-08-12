@@ -1,105 +1,99 @@
-import { Plus, ExternalLink, Clock, CheckCircle } from "lucide-react"
-import styles from "./assignmentsTab.module.css"
-import { useNavigate } from "react-router"
+import React, { useEffect, useState } from "react";
+import { Plus, ExternalLink, Clock, CheckCircle } from "lucide-react";
+import styles from "./assignmentsTab.module.css";
+import { useNavigate } from "react-router";
+
 interface AssignmentsTabProps {
-    classId: string
+    classId: string;
 }
+
 interface AssignmentInterface {
-    id: number
-    title: string
-    type: "Project" | "Quiz" | "Assignment" | "Exam"
-    points: number
-    dueDate: string
-    submitted: number
-    total: number
-    status: string
-    avgScore: {
-        current: number
-        total: number
-    } | null
+    _id: string;
+    title: string;
+    assignmentType: "project" | "quiz" | "assignment" | "exam";
+    points: number;
+    dueDate: string;
+    instructions: string;
+    settings?: {
+        allowLateSubmissions?: boolean;
+        requireSubmission?: boolean;
+        showPoints?: boolean;
+        notifyStudents?: boolean;
+    };
 }
 
-const mockAssignments: AssignmentInterface[] = [
-    {
-        id: 1,
-        title: "Final Project: Building a Web Application",
-        type: "Project",
-        points: 100,
-        dueDate: "May 25, 2025 at 11:59 PM",
-        submitted: 18,
-        total: 32,
-        status: "Active",
-        avgScore: null,
-    },
-    {
-        id: 2,
-        title: "Quiz #3: JavaScript Fundamentals",
-        type: "Quiz",
-        points: 50,
-        dueDate: "May 17, 2025 at 11:59 PM",
-        submitted: 32,
-        total: 32,
-        status: "Graded",
-        avgScore: { current: 43, total: 50 },
-    },
-    {
-        id: 3,
-        title: "Assignment #4: React Components",
-        type: "Assignment",
-        points: 75,
-        dueDate: "May 20, 2025 at 11:59 PM",
-        submitted: 28,
-        total: 32,
-        status: "Active",
-        avgScore: null,
-    },
-    {
-        id: 4,
-        title: "Midterm Exam",
-        type: "Exam",
-        points: 150,
-        dueDate: "April 15, 2025 at 11:59 PM",
-        submitted: 32,
-        total: 32,
-        status: "Graded",
-        avgScore: { current: 132, total: 150 },
-    },
-]
-
-const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
+const AssignmentsTab = ({ classId }: AssignmentsTabProps) => {
+    const [assignments, setAssignments] = useState<AssignmentInterface[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
 
-    const getStatusBadge = (status: string) => {
-        const baseClass = styles.statusBadge
-        if (status === "Active") {
-            return `${baseClass} ${styles.statusActive}`
-        } else if (status === "Graded") {
-            return `${baseClass} ${styles.statusGraded}`
-        }
-        return baseClass
-    }
+    useEffect(() => {
+        const fetchAssignments = async () => {
+            try {
+                setLoading(true);
+                setError(null);
 
-    const getTypeIcon = (status: string) => {
-        const isGraded = status === "Graded";
+                const response = await fetch(`http://localhost:5000/api/classes/${classId}/assignments`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                });
+                // const text = await response.text();
+
+                const data = await response.json();
+                console.log("Raw response text:", data);
+
+
+                if (!response.ok) {
+                    throw new Error(data.message || "Failed to fetch assignments");
+                }
+
+                setAssignments(data.data);
+            } catch (err: any) {
+                setError(err.message || "Unknown error");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAssignments();
+    }, [classId]);
+
+    const getStatusBadge = (dueDateStr: string) => {
+        const dueDate = new Date(dueDateStr);
+        const now = new Date();
+
+        if (dueDate < now) {
+            return `${styles.statusBadge} ${styles.statusGraded}`;
+        }
+        return `${styles.statusBadge} ${styles.statusActive}`;
+    };
+
+    const getTypeIcon = (statusClassName: string) => {
+        const isGraded = statusClassName.includes(styles.statusGraded);
 
         return (
             <div className={`${styles.typeIcon} ${isGraded ? styles.gradedIcon : styles.activeIcon}`}>
                 {isGraded ? <CheckCircle className={styles.iconSymbol} /> : <Clock className={styles.iconSymbol} />}
             </div>
-        )
-    }
+        );
+    };
 
     const handleCreateAssignment = () => {
         window.scrollTo(0, 0);
-        console.log("Create Assignment clicked");
-        navigate("/createAssignments");
-    }
+        navigate(`/createAssignments/${classId}`);
+    };
 
-    const handleViewDetails = () => {
+    const handleViewDetails = (assignmentId: string) => {
         window.scrollTo(0, 0);
-        navigate("/teacherAssignmentDetails");
-    }
+        navigate(`/teacherAssignmentDetails/${assignmentId}`);
+    };
+
+    if (loading) return <div>Loading assignments...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className={styles.container}>
@@ -112,50 +106,45 @@ const AsssignmentsTab = ({ classId }: AssignmentsTabProps) => {
             </div>
 
             <div className={styles.assignmentsList}>
-                {mockAssignments.map((assignment) => (
-                    <div key={assignment.id} className={styles.assignmentCard}>
-                        <div className={styles.cardHeader}>
-                            <div className={styles.assignmentInfo}>
-                                {getTypeIcon(assignment.status)}
-                                <div className={styles.assignmentDetails}>
-                                    <h3 className={styles.assignmentTitle}>{assignment.title}</h3>
-                                    <p className={styles.assignmentMeta}>
-                                        {assignment.type} • {assignment.points} points  <br /> Due {assignment.dueDate}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={styles.cardActions}>
-                                <span className={getStatusBadge(assignment.status)}>
-                                    {assignment.status}
-                                </span>
-                                <button onClick={handleViewDetails} className={styles.viewButton}>
-                                    <ExternalLink className={styles.viewIcon} />
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
+                {assignments.length === 0 && <p>No assignments found.</p>}
 
-                        <div className={styles.cardStats}>
-                            <div className={styles.submissionStats}>
-                                <span className={styles.statLabel}>Submissions:</span>
-                                <span className={styles.statValue}>
-                                    {assignment.submitted}/{assignment.total} submitted
-                                </span>
-                            </div>
-                            {assignment.avgScore && (
-                                <div className={styles.gradeStats}>
-                                    <span className={styles.statLabel}>Average Score:</span>
-                                    <span className={styles.statValue}>
-                                        {assignment.avgScore.current}/{assignment.avgScore.total} avg. score
-                                    </span>
+                {assignments.map((assignment) => {
+                    const statusClass = getStatusBadge(assignment.dueDate);
+                    const dueDateFormatted = new Date(assignment.dueDate).toLocaleString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    });
+
+                    return (
+                        <div key={assignment._id} className={styles.assignmentCard}>
+                            <div className={styles.cardHeader}>
+                                <div className={styles.assignmentInfo}>
+                                    {getTypeIcon(statusClass)}
+                                    <div className={styles.assignmentDetails}>
+                                        <h3 className={styles.assignmentTitle}>{assignment.title}</h3>
+                                        <p className={styles.assignmentMeta}>
+                                            {assignment.assignmentType.charAt(0).toUpperCase() + assignment.assignmentType.slice(1)} • {assignment.points} points
+                                            <br /> Due {dueDateFormatted}
+                                        </p>
+                                    </div>
                                 </div>
-                            )}
+                                <div className={styles.cardActions}>
+                                    <span className={statusClass}>{statusClass.includes(styles.statusGraded) ? "Graded" : "Active"}</span>
+                                    <button onClick={() => handleViewDetails(assignment._id)} className={styles.viewButton}>
+                                        <ExternalLink className={styles.viewIcon} />
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default AsssignmentsTab
+export default AssignmentsTab;

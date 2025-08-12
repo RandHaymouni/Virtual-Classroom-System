@@ -41,7 +41,7 @@ const TeacherDashboard = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // مهم عشان الكوكي يروح
+        credentials: 'include', 
       })
 
       if (!response.ok) {
