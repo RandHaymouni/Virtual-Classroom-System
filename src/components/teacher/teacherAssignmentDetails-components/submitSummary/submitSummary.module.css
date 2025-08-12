@@ -1,46 +1,66 @@
 .submitSummaryContainer {
-    width: 380px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid grey;
-    border-radius: 10px;
-    row-gap: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.138);
+  width: 380px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 10px;
+  row-gap: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.138);
+}
+
+.myGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .summaryTitle,
 .summaryDetails,
 .dueDateDesc {
-        color: gray;
-        font-weight: 500;
+  color: gray;
+  font-weight: 500;
 }
+
 .summaryNumber,
 .dueDate {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
+
 .dueDate {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 768px) {
-    .submitSummaryContainer {
-        width: 90%;
-        height: auto;
-        padding: 10px;
-        margin: 0 auto;
-        margin-bottom: 2%;
-    }
-    .summaryTitle,
-    .summaryDetails,
-    .dueDateDesc {
-        font-size: 14px;
-    }
-    .summaryNumber,
-    .dueDate {
-        font-size: 16px;
-    }
-    
+  .submitSummaryContainer {
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+    margin-bottom: 2%;
+  }
+
+  .myGrid {
+    flex-direction: column;
+  }
+
+  .summaryTitle,
+  .summaryDetails,
+  .dueDateDesc {
+    font-size: 14px;
+  }
+
+  .summaryNumber,
+  .dueDate {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .submitSummaryContainer {
+    flex: 1 1 calc(33.333% - 1.5rem);
+  }
 }
